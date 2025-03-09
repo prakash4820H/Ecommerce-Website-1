@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>THIS™ – Home</title>
+    <!-- Google Font for a modern look -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="sticky">
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <!-- Hero Slider Section -->
+      <section class="hero-slider">
+        <div
+          class="slide active"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1560185127-6e7c6a6eb0ab?auto=format&fit=crop&w=1200&q=80');
+          "
+        >
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <h1>Welcome to THIS™</h1>
+            <p>Revolutionizing plant-based meat alternatives.</p>
+            <a href="products.html" class="btn">Shop Now</a>
+          </div>
+        </div>
+        <div
+          class="slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1580467572794-cc9590ec133f?auto=format&fit=crop&w=1200&q=80');
+          "
+        >
+          <div class="slide-overlay"></div>
+          <div class="slide-content">
+            <h1>Innovative Taste</h1>
+            <p>Experience real flavor with sustainable innovation.</p>
+            <a href="products.html" class="btn">Explore Products</a>
+          </div>
+        </div>
+        <!-- Slider Navigation Dots -->
+        <div class="slider-dots">
+          <span class="dot active" onclick="showSlide(0)"></span>
+          <span class="dot" onclick="showSlide(1)"></span>
+        </div>
+      </section>
+
+      <!-- Featured Products Section -->
+      <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="featured-products">
+          <!-- Products loaded dynamically via JS -->
+        </div>
+      </section>
+
+      <!-- Testimonials Section -->
+      <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-container">
+          <div class="testimonial">
+            <p>
+              "THIS™ has completely changed my view on plant-based food. The
+              taste is extraordinary!"
+            </p>
+            <h4>- Alex</h4>
+          </div>
+          <div class="testimonial">
+            <p>
+              "Finally, a product that combines quality with sustainability. I'm
+              in love!"
+            </p>
+            <h4>- Jamie</h4>
+          </div>
+          <div class="testimonial">
+            <p>
+              "Every bite is bursting with flavor. THIS™ is truly setting a new
+              standard."
+            </p>
+            <h4>- Morgan</h4>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call To Action Section -->
+      <section class="cta">
+        <h2>Join the Plant-Based Revolution</h2>
+        <p>Stay updated with our latest products and exclusive offers.</p>
+        <a href="subscribe.html" class="btn">Subscribe Now</a>
+      </section>
+      <!-- Extended Product Showcase Section -->
+      <section class="extended-products">
+        <h2>Explore Our Full Range</h2>
+        <div class="product-grid" id="extended-products">
+          <!-- All products will be loaded here via JS -->
+        </div>
+        <a href="products.html" class="btn">View All Products</a>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 THIS™. All rights reserved.</p>
+    </footer>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

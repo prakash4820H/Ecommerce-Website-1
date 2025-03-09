@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart – THIS™</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header class="sticky">
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="cart.html" class="active">Cart</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="cart">
+        <h1>Your Shopping Cart</h1>
+        <div class="cart-items" id="cart-items">
+          <!-- Cart items loaded dynamically -->
+        </div>
+        <div class="cart-total">
+          <h3>Total: ₹<span id="cart-total">0.00</span></h3>
+          <button id="checkout" class="btn">Proceed to Checkout</button>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy; 2025 THIS™. All rights reserved.</p>
+    </footer>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
