@@ -21,6 +21,7 @@ header.sticky {
   padding: 15px 0;
 }
 
+
 nav ul {
   display: flex;
   justify-content: center;
@@ -29,8 +30,9 @@ nav ul {
 
 /* Logo spacing */
 nav ul li.logo {
-  margin-right: 50px;
+  margin-right: 50px; /* Adjust as needed */
 }
+
 
 nav ul li {
   margin: 0 20px;
