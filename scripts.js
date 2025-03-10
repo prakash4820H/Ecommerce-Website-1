@@ -1,5 +1,5 @@
 // Updated product data with real image URLs (sourced from Unsplash as examples)
-// Note: Include all 28 products as needed
+// Product array now uses the pound symbol (£) for display
 const products = [
   {
     id: 1,
@@ -144,8 +144,7 @@ const products = [
     price: 229.0,
     image:
       "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=80",
-    description:
-      "Perfect for sandwiches and wraps, our deli slices are a game changer."
+    description: "Perfect for sandwiches and wraps, our deli slices are a game changer."
   },
   {
     id: 19,
@@ -169,8 +168,7 @@ const products = [
     price: 499.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoa5TbiwJfR4hGDZtdHWAjorhCmSLu0n_A7A&s",
-    description:
-      "Premium, tender filets that redefine luxury in plant-based cuisine."
+    description: "Premium, tender filets that redefine luxury in plant-based cuisine."
   },
   {
     id: 22,
@@ -178,8 +176,7 @@ const products = [
     price: 359.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSTuSK-8gPrwH7h9PPL22hvSRB9bpaM4YVIQ&s",
-    description:
-      "Hearty and comforting, our pot pie is a full meal in every bite."
+    description: "Hearty and comforting, our pot pie is a full meal in every bite."
   },
   {
     id: 23,
@@ -187,8 +184,7 @@ const products = [
     price: 329.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5O1JLrAepd6wJFITSh5YU2oeHeOiLGiB4Q&s",
-    description:
-      "A delicious, home-style casserole that’s both hearty and healthy."
+    description: "A delicious, home-style casserole that’s both hearty and healthy."
   },
   {
     id: 24,
@@ -301,7 +297,6 @@ function updateCart() {
 
 // On DOM load, initialize cart from localStorage and display products
 document.addEventListener("DOMContentLoaded", () => {
-  // Retrieve saved cart
   const savedCart = localStorage.getItem("cart");
   if (savedCart) {
     cart = JSON.parse(savedCart);
