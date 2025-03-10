@@ -274,23 +274,23 @@ document.addEventListener("DOMContentLoaded", () => {
     cart = JSON.parse(savedCart);
   }
   
-  // On the homepage, load 8 products into the "featured-products" container
-  if (document.getElementById("featured-products")) {
+  // If we're on the products page, the container with id "all-products" will exist.
+  if (document.getElementById("all-products")) {
+    displayProducts("all-products", products);
+  } 
+  // Otherwise, if we're on the homepage, load 8 products into "featured-products".
+  else if (document.getElementById("featured-products")) {
     displayProducts("featured-products", products.slice(0, 8));
   }
   
-  // On the products page, load all products into the "all-products" container
-  if (document.getElementById("all-products")) {
-    displayProducts("all-products", products);
-  }
-  
-  // If there's an extended products container, load all products into it
+  // Optional: if there is an extended products container, load all products into it.
   if (document.getElementById("extended-products")) {
     displayProducts("extended-products", products);
   }
   
   updateCart();
 });
+
 
 
 // Slider functionality for hero section
