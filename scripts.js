@@ -273,10 +273,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedCart) {
     cart = JSON.parse(savedCart);
   }
-  displayProducts("featured-products", products);
-
+  
+  // On the homepage, load 8 products into the "featured-products" container
+  if (document.getElementById("featured-products")) {
+    displayProducts("featured-products", products.slice(0, 8));
+  }
+  
+  // On the products page, load all products into the "all-products" container
+  if (document.getElementById("all-products")) {
+    displayProducts("all-products", products);
+  }
+  
+  // If there's an extended products container, load all products into it
+  if (document.getElementById("extended-products")) {
+    displayProducts("extended-products", products);
+  }
+  
   updateCart();
 });
+
 
 // Slider functionality for hero section
 let currentSlide = 0;
