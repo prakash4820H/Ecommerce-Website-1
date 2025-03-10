@@ -14,7 +14,9 @@ body {
 
 /* Sticky Header & Navigation */
 header.sticky {
-  background-color: #222;
+  /* Replace black background with a background image */
+  background: url('https://via.placeholder.com/1920x150') no-repeat center center;
+  background-size: cover;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -25,6 +27,10 @@ nav ul {
   display: flex;
   justify-content: center;
   list-style: none;
+}
+
+nav ul li.logo {
+  margin-right: 50px; /* Adjust as needed for spacing */
 }
 
 nav ul li {
