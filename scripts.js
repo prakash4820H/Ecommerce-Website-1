@@ -267,29 +267,30 @@ function updateCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-// On DOM load, initialize cart from localStorage and display products
 document.addEventListener("DOMContentLoaded", () => {
   const savedCart = localStorage.getItem("cart");
   if (savedCart) {
     cart = JSON.parse(savedCart);
   }
   
-  // If we're on the products page, the container with id "all-products" will exist.
+  // Load all products on products page if container exists
   if (document.getElementById("all-products")) {
     displayProducts("all-products", products);
-  } 
-  // Otherwise, if we're on the homepage, load 8 products into "featured-products".
-  else if (document.getElementById("featured-products")) {
+  }
+  
+  // On the homepage, load only 8 products if that container exists
+  if (document.getElementById("featured-products")) {
     displayProducts("featured-products", products.slice(0, 8));
   }
   
-  // Optional: if there is an extended products container, load all products into it.
+  // If extended-products container exists, load all products
   if (document.getElementById("extended-products")) {
     displayProducts("extended-products", products);
   }
   
   updateCart();
 });
+
 
 
 
