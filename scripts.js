@@ -1,5 +1,5 @@
 // Updated product data with real image URLs (sourced from Unsplash as examples)
-// Updated product array with 28 products total (4 original + 24 new ones)
+// Note: Include all 28 products as needed
 const products = [
   {
     id: 1,
@@ -7,7 +7,7 @@ const products = [
     price: 299.0,
     image:
       "https://downshiftology.com/wp-content/uploads/2019/02/Crispy-Baked-Chicken-Thighs-main.jpg",
-    description: "Delicious, plant-based chicken thighs that taste real.",
+    description: "Delicious, plant-based chicken thighs that taste real."
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ const products = [
     price: 249.0,
     image:
       "https://www.allrecipes.com/thmb/tnXjQLBtzLNLfi7KEIuOrVzKbWs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/158727-bacon-for-the-family-or-a-crowd-beauty-DDMFS-071-d1cd1e76787b4374b3d046d50b709c83.jpeg",
-    description: "Crispy, smoky, plant-based bacon strips.",
+    description: "Crispy, smoky, plant-based bacon strips."
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ const products = [
     price: 199.0,
     image:
       "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=400&q=80",
-    description: "Savory, spicy plant-based sausages.",
+    description: "Savory, spicy plant-based sausages."
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ const products = [
     price: 349.0,
     image:
       "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80",
-    description: "Juicy, flavorful burger that redefines taste.",
+    description: "Juicy, flavorful burger that redefines taste."
   },
   // Additional 24 products (IDs 5 to 28):
   {
@@ -40,7 +40,7 @@ const products = [
     price: 279.0,
     image:
       "https://www.flavcity.com/wp-content/uploads/2018/06/meatballs-tomato-sauce.jpg",
-    description: "Tasty plant-based meatballs that pack a punch.",
+    description: "Tasty plant-based meatballs that pack a punch."
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ const products = [
     price: 199.0,
     image:
       "https://www.lemontreedwelling.com/wp-content/uploads/2021/03/crispy-chicken-nuggets-featured.jpg",
-    description: "Crispy and delicious nuggets made from plants.",
+    description: "Crispy and delicious nuggets made from plants."
   },
   {
     id: 7,
@@ -56,7 +56,7 @@ const products = [
     price: 399.0,
     image:
       "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400&q=80",
-    description: "A perfect roast for family dinners, reimagined.",
+    description: "A perfect roast for family dinners, reimagined."
   },
   {
     id: 8,
@@ -64,7 +64,7 @@ const products = [
     price: 499.0,
     image:
       "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=80",
-    description: "Succulent plant-based steak that satisfies your cravings.",
+    description: "Succulent plant-based steak that satisfies your cravings."
   },
   {
     id: 9,
@@ -72,7 +72,7 @@ const products = [
     price: 279.0,
     image:
       "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=400&q=80",
-    description: "Flavorful and tender kebabs redefined for plant lovers.",
+    description: "Flavorful and tender kebabs redefined for plant lovers."
   },
   {
     id: 10,
@@ -80,7 +80,7 @@ const products = [
     price: 199.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpTzfgGJziZr_hSfBRsNJjaYYmS2rQoVal2A&s",
-    description: "A high-protein, chewy jerky made entirely from plants.",
+    description: "A high-protein, chewy jerky made entirely from plants."
   },
   {
     id: 11,
@@ -88,7 +88,7 @@ const products = [
     price: 349.0,
     image:
       "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=80",
-    description: "Melt-in-your-mouth pulled pork, now plant-based.",
+    description: "Melt-in-your-mouth pulled pork, now plant-based."
   },
   {
     id: 12,
@@ -96,7 +96,7 @@ const products = [
     price: 399.0,
     image:
       "https://www.seriouseats.com/thmb/7krlJdfnpXB53aqHg-vBSHjiDPc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/perfectly-grilled-lamb-rib-or-loin-chops-recipe-hero-03-262fe2defc7c491688cb2d363dad3446.JPG",
-    description: "Savor the taste of lamb with a sustainable twist.",
+    description: "Savor the taste of lamb with a sustainable twist."
   },
   {
     id: 13,
@@ -104,7 +104,7 @@ const products = [
     price: 159.0,
     image:
       "https://potatorolls.com/wp-content/uploads/2020/10/Basic-Hot-Dogs-960x640.jpg",
-    description: "All the flavor of a classic hot dog in a plant-based form.",
+    description: "All the flavor of a classic hot dog in a plant-based form."
   },
   {
     id: 14,
@@ -112,7 +112,7 @@ const products = [
     price: 429.0,
     image:
       "https://www.allrecipes.com/thmb/IWVelWahUb2gQxixWJC2N-HXp0k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/22469-Barbecue-Ribs-ddmfs-2x1-210-e799db142f594b00bb317bb357d0971c.jpg",
-    description: "Finger-licking good ribs that are completely meat-free.",
+    description: "Finger-licking good ribs that are completely meat-free."
   },
   {
     id: 15,
@@ -120,7 +120,7 @@ const products = [
     price: 299.0,
     image:
       "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?auto=format&fit=crop&w=400&q=80",
-    description: "The perfect patty to create a gourmet plant-based burger.",
+    description: "The perfect patty to create a gourmet plant-based burger."
   },
   {
     id: 16,
@@ -128,7 +128,7 @@ const products = [
     price: 189.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwpzxhnGRgE7kZ-bAh0_KNQNDh-xlFsbEQPg&s",
-    description: "A savory snack that's perfect on the go.",
+    description: "A savory snack that's perfect on the go."
   },
   {
     id: 17,
@@ -136,7 +136,7 @@ const products = [
     price: 319.0,
     image:
       "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400&q=80",
-    description: "Comfort food redefined with a plant-based twist.",
+    description: "Comfort food redefined with a plant-based twist."
   },
   {
     id: 18,
@@ -145,7 +145,7 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=80",
     description:
-      "Perfect for sandwiches and wraps, our deli slices are a game changer.",
+      "Perfect for sandwiches and wraps, our deli slices are a game changer."
   },
   {
     id: 19,
@@ -153,7 +153,7 @@ const products = [
     price: 189.0,
     image:
       "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=400&q=80",
-    description: "Ideal for topping salads, pizzas, or pastas.",
+    description: "Ideal for topping salads, pizzas, or pastas."
   },
   {
     id: 20,
@@ -161,7 +161,7 @@ const products = [
     price: 269.0,
     image:
       "https://www.southernliving.com/thmb/RzX4eCIQUpQvnj-qQcyw2FwSUWk=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Southern-Living_Shredded_Chicken_516-098e6399ff4a45cda9bcb7fe3a720b03.jpg",
-    description: "Versatile shreds that work in a variety of dishes.",
+    description: "Versatile shreds that work in a variety of dishes."
   },
   {
     id: 21,
@@ -170,7 +170,7 @@ const products = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoa5TbiwJfR4hGDZtdHWAjorhCmSLu0n_A7A&s",
     description:
-      "Premium, tender filets that redefine luxury in plant-based cuisine.",
+      "Premium, tender filets that redefine luxury in plant-based cuisine."
   },
   {
     id: 22,
@@ -179,7 +179,7 @@ const products = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSTuSK-8gPrwH7h9PPL22hvSRB9bpaM4YVIQ&s",
     description:
-      "Hearty and comforting, our pot pie is a full meal in every bite.",
+      "Hearty and comforting, our pot pie is a full meal in every bite."
   },
   {
     id: 23,
@@ -188,7 +188,7 @@ const products = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5O1JLrAepd6wJFITSh5YU2oeHeOiLGiB4Q&s",
     description:
-      "A delicious, home-style casserole that’s both hearty and healthy.",
+      "A delicious, home-style casserole that’s both hearty and healthy."
   },
   {
     id: 24,
@@ -196,7 +196,7 @@ const products = [
     price: 209.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1nHG02s92DPIjxyRlhseB3Tg9Q7xSdBpyCQ&s",
-    description: "Spice up your meal time with these flavorful tacos.",
+    description: "Spice up your meal time with these flavorful tacos."
   },
   {
     id: 25,
@@ -204,7 +204,7 @@ const products = [
     price: 189.0,
     image:
       "https://cdn.loveandlemons.com/wp-content/uploads/2024/01/quesadilla.jpg",
-    description: "A melty, cheesy delight that's completely plant-based.",
+    description: "A melty, cheesy delight that's completely plant-based."
   },
   {
     id: 26,
@@ -212,7 +212,7 @@ const products = [
     price: 329.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK4eOu6izSAmIDDQaj6V4O7b4zI85A4BIPbQ&s",
-    description: "Rich and savory sauce served over al dente pasta.",
+    description: "Rich and savory sauce served over al dente pasta."
   },
   {
     id: 27,
@@ -220,7 +220,7 @@ const products = [
     price: 279.0,
     image:
       "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=400&q=80",
-    description: "A spicy, aromatic curry that will warm your heart.",
+    description: "A spicy, aromatic curry that will warm your heart."
   },
   {
     id: 28,
@@ -228,8 +228,8 @@ const products = [
     price: 219.0,
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxEeNajhrGJcoGgbUcrrCP-w2Q81GVdV8L6A&s",
-    description: "A quick and healthy stir-fry packed with flavor.",
-  },
+    description: "A quick and healthy stir-fry packed with flavor."
+  }
 ];
 
 // Global cart array
@@ -242,10 +242,8 @@ function createProductCard(product) {
       <img src="${product.image}" alt="${product.name}">
       <h3>${product.name}</h3>
       <p>${product.description}</p>
-      <p>₹${product.price.toFixed(2)}</p>
-      <button class="add-to-cart" onclick="addToCart(${
-        product.id
-      })">Add to Cart</button>
+      <p>£${product.price.toFixed(2)}</p>
+      <button class="add-to-cart" onclick="addToCart(${product.id})">Add to Cart</button>
     </div>
   `;
 }
@@ -260,8 +258,8 @@ function displayProducts(containerId, productArray) {
 
 // Add product to the cart
 function addToCart(productId) {
-  const product = products.find((p) => p.id === productId);
-  let cartItem = cart.find((item) => item.id === productId);
+  const product = products.find(p => p.id === productId);
+  let cartItem = cart.find(item => item.id === productId);
   if (cartItem) {
     cartItem.quantity++;
   } else {
@@ -273,7 +271,7 @@ function addToCart(productId) {
 
 // Remove product from the cart
 function removeFromCart(productId) {
-  cart = cart.filter((item) => item.id !== productId);
+  cart = cart.filter(item => item.id !== productId);
   updateCart();
 }
 
@@ -283,22 +281,19 @@ function updateCart() {
   if (cartContainer) {
     cartContainer.innerHTML = cart
       .map(
-        (item) => `
+        item => `
       <div class="cart-item">
         <img src="${item.image}" alt="${item.name}">
         <div>
           <h4>${item.name}</h4>
-          <p>₹${item.price.toFixed(2)} x ${item.quantity}</p>
+          <p>£${item.price.toFixed(2)} x ${item.quantity}</p>
           <button onclick="removeFromCart(${item.id})">Remove</button>
         </div>
       </div>
     `
       )
       .join("");
-    const total = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     document.getElementById("cart-total").innerText = total.toFixed(2);
   }
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -315,10 +310,8 @@ document.addEventListener("DOMContentLoaded", () => {
   displayProducts("featured-products", products.slice(0, 2));
   // Load all products if on products page
   displayProducts("all-products", products);
-  // Update cart display
   // Load extended product showcase if the container exists
   displayProducts("extended-products", products);
-
   updateCart();
 });
 
