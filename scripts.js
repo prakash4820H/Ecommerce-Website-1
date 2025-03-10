@@ -273,12 +273,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedCart) {
     cart = JSON.parse(savedCart);
   }
-  // Load featured products (first two)
-  displayProducts("featured-products", products.slice(0, 2));
-  // Load all products if on products page
-  displayProducts("all-products", products);
-  // Load extended product showcase if the container exists
-  displayProducts("extended-products", products);
+  displayProducts("featured-products", products);
+
   updateCart();
 });
 
