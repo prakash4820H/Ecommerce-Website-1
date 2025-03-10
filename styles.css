@@ -132,10 +132,11 @@ button:hover {
 
 .product-card img,
 .product img {
-  max-width: 100%;
-  border-radius: 8px;
-  margin-bottom: 15px;
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  object-fit: cover;
 }
+
 
 .product-card h3,
 .product h3 {
