@@ -44,30 +44,6 @@ nav ul li a.active {
   border-bottom: 2px solid #7FBF7F;
 }
 
-/* Top Sections (New Section) */
-.top-sections {
-  display: flex;
-  justify-content: space-around;
-  padding: 40px 20px;
-  background: #fff;
-}
-
-.top-sections .section {
-  flex: 1;
-  margin: 0 10px;
-  text-align: center;
-}
-
-.top-sections .section h2 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  color: #7FBF7F;
-}
-
-.top-sections .section p {
-  font-size: 16px;
-}
-
 /* Hero Section */
 .hero {
   position: relative;
