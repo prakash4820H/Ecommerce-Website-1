@@ -40,8 +40,32 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a.active {
-  color: #4CAF50;
-  border-bottom: 2px solid #4CAF50;
+  color: #7FBF7F;
+  border-bottom: 2px solid #7FBF7F;
+}
+
+/* Top Sections (New Section) */
+.top-sections {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 20px;
+  background: #fff;
+}
+
+.top-sections .section {
+  flex: 1;
+  margin: 0 10px;
+  text-align: center;
+}
+
+.top-sections .section h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #7FBF7F;
+}
+
+.top-sections .section p {
+  font-size: 16px;
 }
 
 /* Hero Section */
@@ -85,7 +109,7 @@ nav ul li a.active {
 .btn,
 .add-to-cart,
 button {
-  background-color: #4CAF50;
+  background-color: #7FBF7F;
   border: none;
   color: #fff;
   padding: 10px 20px;
@@ -98,7 +122,7 @@ button {
 .btn:hover,
 .add-to-cart:hover,
 button:hover {
-  background-color: #43a047;
+  background-color: #679e69;
 }
 
 /* Product Grid */
@@ -250,7 +274,7 @@ footer {
 }
 .slider-dots .dot.active {
   opacity: 1;
-  background-color: #4CAF50;
+  background-color: #7FBF7F;
 }
 
 /* Testimonials */
@@ -280,14 +304,14 @@ footer {
   margin-bottom: 10px;
 }
 .testimonial h4 {
-  color: #4CAF50;
+  color: #7FBF7F;
 }
 
 /* Call To Action */
 .cta {
   padding: 40px 20px;
   text-align: center;
-  background: #4CAF50;
+  background: #7FBF7F;
   color: #fff;
 }
 .cta h2 {
@@ -307,5 +331,5 @@ footer {
 }
 .extended-products h2 {
   margin-bottom: 20px;
-  color: #4CAF50;
+  color: #7FBF7F;
 }
