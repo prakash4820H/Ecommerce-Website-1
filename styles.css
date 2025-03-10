@@ -40,8 +40,8 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a.active {
-  color: #ff6600;
-  border-bottom: 2px solid #ff6600;
+  color: #4CAF50;
+  border-bottom: 2px solid #4CAF50;
 }
 
 /* Hero Section */
@@ -85,7 +85,7 @@ nav ul li a.active {
 .btn,
 .add-to-cart,
 button {
-  background-color: #ff6600;
+  background-color: #4CAF50;
   border: none;
   color: #fff;
   padding: 10px 20px;
@@ -98,7 +98,7 @@ button {
 .btn:hover,
 .add-to-cart:hover,
 button:hover {
-  background-color: #e65c00;
+  background-color: #43a047;
 }
 
 /* Product Grid */
@@ -133,10 +133,9 @@ button:hover {
 .product-card img,
 .product img {
   width: 100%;
-  height: 200px; /* Adjust height as needed */
+  height: 200px; /* Ensures consistent image sizing */
   object-fit: cover;
 }
-
 
 .product-card h3,
 .product h3 {
@@ -251,7 +250,7 @@ footer {
 }
 .slider-dots .dot.active {
   opacity: 1;
-  background-color: #ff6600;
+  background-color: #4CAF50;
 }
 
 /* Testimonials */
@@ -281,14 +280,14 @@ footer {
   margin-bottom: 10px;
 }
 .testimonial h4 {
-  color: #ff6600;
+  color: #4CAF50;
 }
 
 /* Call To Action */
 .cta {
   padding: 40px 20px;
   text-align: center;
-  background: #ff6600;
+  background: #4CAF50;
   color: #fff;
 }
 .cta h2 {
@@ -308,5 +307,5 @@ footer {
 }
 .extended-products h2 {
   margin-bottom: 20px;
-  color: #ff6600;
+  color: #4CAF50;
 }
