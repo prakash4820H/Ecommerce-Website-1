@@ -21,15 +21,15 @@ header.sticky {
   padding: 15px 0;
 }
 
-
 nav ul {
   display: flex;
   justify-content: center;
   list-style: none;
 }
 
+/* Logo spacing */
 nav ul li.logo {
-  margin-right: 50px; /* Adjust as needed for spacing */
+  margin-right: 50px;
 }
 
 nav ul li {
@@ -53,8 +53,7 @@ nav ul li a.active {
 .hero {
   position: relative;
   height: 600px;
-  background: url("https://images.unsplash.com/photo-1560185127-6e7c6a6eb0ab?auto=format&fit=crop&w=1200&q=80")
-    no-repeat center center/cover;
+  background: url("https://images.unsplash.com/photo-1560185127-6e7c6a6eb0ab?auto=format&fit=crop&w=1200&q=80") no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -138,7 +137,7 @@ button:hover {
 .product-card img,
 .product img {
   width: 100%;
-  height: 200px; /* Ensures consistent image sizing */
+  height: 200px;
   object-fit: cover;
 }
 
