@@ -1,4 +1,4 @@
-/* Product Data */
+/* Product Data with 28 products */
 const products = [
   {
     id: 1,
@@ -250,7 +250,7 @@ function displayProducts(containerId, productArray) {
   const container = document.getElementById(containerId);
   if (container) {
     container.innerHTML = productArray.map(createProductCard).join("");
-    observeAnimations(); // reapply observer for new elements
+    observeAnimations(); // Reapply observer for new elements
   }
 }
 
@@ -369,11 +369,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Load products on respective pages:
-  // For products page
+  // For Products Page:
   if (document.getElementById("all-products")) {
     displayProducts("all-products", products);
   }
-  // For home page: featured (first 8) and extended (all)
+  // For Home Page: Featured (first 8) and Extended (all)
   if (document.getElementById("featured-products")) {
     displayProducts("featured-products", products.slice(0, 8));
   }
