@@ -17,10 +17,7 @@
         <ul>
           <li class="logo">
             <a href="index.html">
-              <img
-                src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png"
-                alt="THIS logo"
-              />
+              <img src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png" alt="THIS logo" />
             </a>
           </li>
           <li><a href="about.html">About Us</a></li>
@@ -46,10 +43,7 @@
         </div>
       </div>
       <!-- Slide 2 with image background -->
-      <div
-        class="slide"
-        style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_big/5ae0f343d4c1d/andy-rachel-berliner-our-family.jpg');"
-      >
+      <div class="slide" style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_big/5ae0f343d4c1d/andy-rachel-berliner-our-family.jpg');">
         <div class="slide-overlay"></div>
         <div class="slide-content animate-on-scroll">
           <h1>Innovative Taste</h1>
@@ -57,18 +51,28 @@
           <a href="products.html" class="btn">Explore Products</a>
         </div>
       </div>
+      <!-- Slider Dots -->
       <div class="slider-dots">
         <span class="dot active" onclick="showSlide(0)" aria-label="Slide 1"></span>
         <span class="dot" onclick="showSlide(1)" aria-label="Slide 2"></span>
       </div>
     </section>
 
-    <!-- Featured Products Section -->
+    <!-- Featured Products Section (first 8 products) -->
     <section class="featured-products">
       <h2>Featured Products</h2>
       <div class="product-grid" id="featured-products">
-        <!-- 8 products will be loaded dynamically -->
+        <!-- Products loaded dynamically via JS -->
       </div>
+    </section>
+
+    <!-- Extended Products Section (all products) -->
+    <section class="extended-products">
+      <h2>Explore Our Full Range</h2>
+      <div class="product-grid" id="extended-products">
+        <!-- All products loaded dynamically via JS -->
+      </div>
+      <a href="products.html" class="btn">View All Products</a>
     </section>
 
     <!-- Testimonials Section -->
@@ -76,23 +80,15 @@
       <h2>What Our Customers Say</h2>
       <div class="testimonial-container">
         <div class="testimonial animate-on-scroll">
-          <p>
-            "THIS™ has completely changed my view on plant-based food. The taste is
-            extraordinary!"
-          </p>
+          <p>"THIS™ has completely changed my view on plant-based food. The taste is extraordinary!"</p>
           <h4>- Alex</h4>
         </div>
         <div class="testimonial animate-on-scroll">
-          <p>
-            "Finally, a product that combines quality with sustainability. I'm in
-            love!"
-          </p>
+          <p>"Finally, a product that combines quality with sustainability. I'm in love!"</p>
           <h4>- Jamie</h4>
         </div>
         <div class="testimonial animate-on-scroll">
-          <p>
-            "Every bite is bursting with flavor. THIS™ is truly setting a new standard."
-          </p>
+          <p>"Every bite is bursting with flavor. THIS™ is truly setting a new standard."</p>
           <h4>- Morgan</h4>
         </div>
       </div>
@@ -143,21 +139,12 @@
       <a href="subscribe.html" class="btn">Subscribe Now</a>
     </section>
 
-    <!-- Extended Product Showcase Section -->
-    <section class="extended-products">
-      <h2>Explore Our Full Range</h2>
-      <div class="product-grid" id="extended-products">
-        <!-- All products will be loaded dynamically -->
-      </div>
-      <a href="products.html" class="btn">View All Products</a>
-    </section>
-
-    <!-- Product Details Modal -->
+    <!-- Modal for Product Details -->
     <div id="product-modal" class="modal" role="dialog" aria-modal="true">
       <div class="modal-content">
         <span class="close" onclick="closeModal('product-modal')" aria-label="Close Modal">&times;</span>
         <div id="modal-body">
-          <!-- Product details will be loaded dynamically -->
+          <!-- Product details loaded dynamically via JS -->
         </div>
       </div>
     </div>
@@ -180,6 +167,7 @@
     <footer>
       <p>&copy; 2025 THIS™. All rights reserved.</p>
     </footer>
+
     <script src="scripts.js"></script>
   </body>
 </html>
