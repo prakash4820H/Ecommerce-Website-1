@@ -12,13 +12,13 @@
   </head>
   <body>
     <header class="sticky">
-      <nav>
+      <nav aria-label="Main Navigation">
         <ul>
           <li class="logo">
             <a href="index.html">
               <img
                 src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png"
-                alt="Logo"
+                alt="THIS logo"
               />
             </a>
           </li>
@@ -33,11 +33,27 @@
     <main>
       <section class="product-list">
         <h1>Our Products</h1>
+        <div class="filter-options">
+          <button onclick="filterProducts('all')">All</button>
+          <button onclick="filterProducts('burger')">Burgers</button>
+          <button onclick="filterProducts('sausage')">Sausages</button>
+          <!-- More filters as needed -->
+        </div>
         <div class="product-grid" id="all-products">
           <!-- All products will be loaded dynamically -->
         </div>
       </section>
     </main>
+
+    <!-- Product Details Modal (Same as on the homepage) -->
+    <div id="product-modal" class="modal" role="dialog" aria-modal="true">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('product-modal')" aria-label="Close Modal">&times;</span>
+        <div id="modal-body">
+          <!-- Product details will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
 
     <footer>
       <p>&copy; 2025 THIS™. All rights reserved.</p>
