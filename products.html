@@ -11,15 +11,13 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <!-- Navigation -->
     <header class="sticky">
       <nav aria-label="Main Navigation">
         <ul>
           <li class="logo">
             <a href="index.html">
-              <img
-                src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png"
-                alt="THIS logo"
-              />
+              <img src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png" alt="THIS logo" />
             </a>
           </li>
           <li><a href="about.html">About Us</a></li>
@@ -33,24 +31,27 @@
     <main>
       <section class="product-list">
         <h1>Our Products</h1>
+        <!-- Filter Buttons -->
         <div class="filter-options">
           <button onclick="filterProducts('all')">All</button>
           <button onclick="filterProducts('burger')">Burgers</button>
           <button onclick="filterProducts('sausage')">Sausages</button>
-          <!-- More filters as needed -->
+          <button onclick="filterProducts('nuggets')">Nuggets</button>
+          <!-- Add more filter buttons as needed -->
         </div>
+        <!-- Full Product Grid -->
         <div class="product-grid" id="all-products">
-          <!-- All products will be loaded dynamically -->
+          <!-- Products loaded dynamically via JS -->
         </div>
       </section>
     </main>
 
-    <!-- Product Details Modal (Same as on the homepage) -->
+    <!-- Modal for Product Details (same as in index.html) -->
     <div id="product-modal" class="modal" role="dialog" aria-modal="true">
       <div class="modal-content">
         <span class="close" onclick="closeModal('product-modal')" aria-label="Close Modal">&times;</span>
         <div id="modal-body">
-          <!-- Product details will be loaded dynamically -->
+          <!-- Product details loaded dynamically via JS -->
         </div>
       </div>
     </div>
@@ -58,6 +59,7 @@
     <footer>
       <p>&copy; 2025 THIS™. All rights reserved.</p>
     </footer>
+
     <script src="scripts.js"></script>
   </body>
 </html>
