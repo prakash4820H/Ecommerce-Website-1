@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>THIS™ – Home</title>
-    <!-- Google Font for a modern look -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
       rel="stylesheet"
@@ -15,19 +14,16 @@
     <header class="sticky">
       <nav>
         <ul>
-          <!-- Logo replaces "Home" -->
           <li class="logo">
             <a href="index.html">
               <img
                 src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png"
                 alt="Logo"
-                style="height:50px; width:auto;"
               />
             </a>
           </li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="products.html">Products</a></li>
-          <!-- Shop Now link relocated here (redirects to products page) -->
           <li><a href="products.html">Shop Now</a></li>
           <li><a href="cart.html">Cart</a></li>
         </ul>
@@ -36,60 +32,56 @@
 
     <main>
       <!-- Hero Slider Section -->
-<section class="hero-slider">
-  <div
-    class="slide active"
-    style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_huge/5ae238371e9b6/ingredients-first-italian-0921-3000px.jpg');"
-  >
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <h1>Welcome to THIS™</h1>
-      <p>Revolutionizing plant-based meat alternatives.</p>
-      <!-- Removed the "Shop Now" button from this slide -->
-    </div>
-  </div>
-  <div
-    class="slide"
-    style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_big/5ae0f343d4c1d/andy-rachel-berliner-our-family.jpg');"
-  >
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <h1>Innovative Taste</h1>
-      <p>Experience real flavor with sustainable innovation.</p>
-      <a href="products.html" class="btn">Explore Products</a>
-    </div>
-  </div>
-  <!-- Slider Navigation Dots -->
-  <div class="slider-dots">
-    <span class="dot active" onclick="showSlide(0)"></span>
-    <span class="dot" onclick="showSlide(1)"></span>
-  </div>
-</section>
-
+      <section class="hero-slider">
+        <div
+          class="slide active"
+          style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_huge/5ae238371e9b6/ingredients-first-italian-0921-3000px.jpg');"
+        >
+          <div class="slide-overlay"></div>
+          <div class="slide-content animate-on-scroll">
+            <h1>Welcome to THIS™</h1>
+            <p>Revolutionizing plant-based meat alternatives.</p>
+          </div>
+        </div>
+        <div
+          class="slide"
+          style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_big/5ae0f343d4c1d/andy-rachel-berliner-our-family.jpg');"
+        >
+          <div class="slide-overlay"></div>
+          <div class="slide-content animate-on-scroll">
+            <h1>Innovative Taste</h1>
+            <p>Experience real flavor with sustainable innovation.</p>
+            <a href="products.html" class="btn">Explore Products</a>
+          </div>
+        </div>
+        <!-- Slider Navigation Dots -->
+        <div class="slider-dots">
+          <span class="dot active" onclick="showSlide(0)"></span>
+          <span class="dot" onclick="showSlide(1)"></span>
+        </div>
+      </section>
 
       <!-- Featured Products Section -->
-<!-- In index.html -->
-<section class="featured-products">
-  <h2>Featured Products</h2>
-  <div class="product-grid" id="featured-products">
-    <!-- 8 products will be loaded here -->
-  </div>
-</section>
-
+      <section class="featured-products">
+        <h2>Featured Products</h2>
+        <div class="product-grid" id="featured-products">
+          <!-- 8 products will be loaded dynamically -->
+        </div>
+      </section>
 
       <!-- Testimonials Section -->
       <section class="testimonials">
         <h2>What Our Customers Say</h2>
         <div class="testimonial-container">
-          <div class="testimonial">
+          <div class="testimonial animate-on-scroll">
             <p>"THIS™ has completely changed my view on plant-based food. The taste is extraordinary!"</p>
             <h4>- Alex</h4>
           </div>
-          <div class="testimonial">
+          <div class="testimonial animate-on-scroll">
             <p>"Finally, a product that combines quality with sustainability. I'm in love!"</p>
             <h4>- Jamie</h4>
           </div>
-          <div class="testimonial">
+          <div class="testimonial animate-on-scroll">
             <p>"Every bite is bursting with flavor. THIS™ is truly setting a new standard."</p>
             <h4>- Morgan</h4>
           </div>
@@ -97,7 +89,7 @@
       </section>
 
       <!-- Call To Action Section -->
-      <section class="cta">
+      <section class="cta animate-on-scroll">
         <h2>Join the Plant-Based Revolution</h2>
         <p>Stay updated with our latest products and exclusive offers.</p>
         <a href="subscribe.html" class="btn">Subscribe Now</a>
@@ -107,7 +99,7 @@
       <section class="extended-products">
         <h2>Explore Our Full Range</h2>
         <div class="product-grid" id="extended-products">
-          <!-- All products loaded dynamically via scripts.js -->
+          <!-- All products will be loaded dynamically -->
         </div>
         <a href="products.html" class="btn">View All Products</a>
       </section>
