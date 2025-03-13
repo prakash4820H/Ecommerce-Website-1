@@ -368,10 +368,12 @@ document.addEventListener("DOMContentLoaded", () => {
     cart = JSON.parse(savedCart);
   }
 
-  // Load products on respective pages
+  // Load products on respective pages:
+  // For products page
   if (document.getElementById("all-products")) {
     displayProducts("all-products", products);
   }
+  // For home page: featured (first 8) and extended (all)
   if (document.getElementById("featured-products")) {
     displayProducts("featured-products", products.slice(0, 8));
   }
