@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>THIS™ – Home</title>
+    <!-- Google Font for a modern look -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
       rel="stylesheet"
@@ -11,163 +12,110 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- Navigation -->
     <header class="sticky">
-      <nav aria-label="Main Navigation">
+      <nav>
         <ul>
+          <!-- Logo replaces "Home" -->
           <li class="logo">
             <a href="index.html">
-              <img src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png" alt="THIS logo" />
+              <img
+                src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png"
+                alt="Logo"
+                style="height:50px; width:auto;"
+              />
             </a>
           </li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="products.html">Products</a></li>
+          <!-- Shop Now link relocated here (redirects to products page) -->
           <li><a href="products.html">Shop Now</a></li>
           <li><a href="cart.html">Cart</a></li>
         </ul>
       </nav>
     </header>
 
-    <!-- Hero Slider Section -->
-    <section class="hero-slider">
-      <!-- Slide 1 with video background -->
-      <div class="slide active">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div class="slide-overlay"></div>
-        <div class="slide-content animate-on-scroll">
-          <h1>Welcome to THIS™</h1>
-          <p>Revolutionizing plant-based meat alternatives.</p>
-        </div>
-      </div>
-      <!-- Slide 2 with image background -->
-      <div class="slide" style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_big/5ae0f343d4c1d/andy-rachel-berliner-our-family.jpg');">
-        <div class="slide-overlay"></div>
-        <div class="slide-content animate-on-scroll">
-          <h1>Innovative Taste</h1>
-          <p>Experience real flavor with sustainable innovation.</p>
-          <a href="products.html" class="btn">Explore Products</a>
-        </div>
-      </div>
-      <!-- Slider Dots -->
-      <div class="slider-dots">
-        <span class="dot active" onclick="showSlide(0)" aria-label="Slide 1"></span>
-        <span class="dot" onclick="showSlide(1)" aria-label="Slide 2"></span>
-      </div>
-    </section>
-
-    <!-- Featured Products Section (first 8 products) -->
-    <section class="featured-products">
-      <h2>Featured Products</h2>
-      <div class="product-grid" id="featured-products">
-        <!-- Products loaded dynamically via JS -->
-      </div>
-    </section>
-
-    <!-- Extended Products Section (all products) -->
-    <section class="extended-products">
-      <h2>Explore Our Full Range</h2>
-      <div class="product-grid" id="extended-products">
-        <!-- All products loaded dynamically via JS -->
-      </div>
-      <a href="products.html" class="btn">View All Products</a>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-      <h2>What Our Customers Say</h2>
-      <div class="testimonial-container">
-        <div class="testimonial animate-on-scroll">
-          <p>"THIS™ has completely changed my view on plant-based food. The taste is extraordinary!"</p>
-          <h4>- Alex</h4>
-        </div>
-        <div class="testimonial animate-on-scroll">
-          <p>"Finally, a product that combines quality with sustainability. I'm in love!"</p>
-          <h4>- Jamie</h4>
-        </div>
-        <div class="testimonial animate-on-scroll">
-          <p>"Every bite is bursting with flavor. THIS™ is truly setting a new standard."</p>
-          <h4>- Morgan</h4>
-        </div>
-      </div>
-    </section>
-
-    <!-- Interactive Infographic Section -->
-    <section class="infographic">
-      <h2>How It's Made</h2>
-      <div class="infographic-container">
-        <div class="infographic-item animate-on-scroll">
-          <img src="https://via.placeholder.com/150" alt="Research and Development" />
-          <h3>Research</h3>
-          <p>Innovative science behind our products.</p>
-        </div>
-        <div class="infographic-item animate-on-scroll">
-          <img src="https://via.placeholder.com/150" alt="Sustainable Ingredients" />
-          <h3>Sourcing</h3>
-          <p>High-quality, sustainable ingredients.</p>
-        </div>
-        <div class="infographic-item animate-on-scroll">
-          <img src="https://via.placeholder.com/150" alt="Modern Production" />
-          <h3>Production</h3>
-          <p>State-of-the-art technology ensuring quality.</p>
-        </div>
-        <div class="infographic-item animate-on-scroll">
-          <img src="https://via.placeholder.com/150" alt="Innovation" />
-          <h3>Innovation</h3>
-          <p>Continuously improving our recipes.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Social Media Feed Section -->
-    <section class="social-feed">
-      <h2>Follow Us on Instagram</h2>
-      <div class="social-images">
-        <img src="https://via.placeholder.com/200" alt="Instagram post 1" class="animate-on-scroll" />
-        <img src="https://via.placeholder.com/200" alt="Instagram post 2" class="animate-on-scroll" />
-        <img src="https://via.placeholder.com/200" alt="Instagram post 3" class="animate-on-scroll" />
-        <img src="https://via.placeholder.com/200" alt="Instagram post 4" class="animate-on-scroll" />
-      </div>
-    </section>
-
-    <!-- Call To Action Section -->
-    <section class="cta animate-on-scroll">
-      <h2>Join the Plant-Based Revolution</h2>
-      <p>Stay updated with our latest products and exclusive offers.</p>
-      <a href="subscribe.html" class="btn">Subscribe Now</a>
-    </section>
-
-    <!-- Modal for Product Details -->
-    <div id="product-modal" class="modal" role="dialog" aria-modal="true">
-      <div class="modal-content">
-        <span class="close" onclick="closeModal('product-modal')" aria-label="Close Modal">&times;</span>
-        <div id="modal-body">
-          <!-- Product details loaded dynamically via JS -->
-        </div>
-      </div>
+    <main>
+      <!-- Hero Slider Section -->
+<section class="hero-slider">
+  <div
+    class="slide active"
+    style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_huge/5ae238371e9b6/ingredients-first-italian-0921-3000px.jpg');"
+  >
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <h1>Welcome to THIS™</h1>
+      <p>Revolutionizing plant-based meat alternatives.</p>
+      <!-- Removed the "Shop Now" button from this slide -->
     </div>
-
-    <!-- Live Chat Widget -->
-    <div id="live-chat" class="chat-widget">
-      <button id="chat-toggle" onclick="toggleChat()">Chat with us!</button>
-      <div id="chat-box" class="chat-box">
-        <div class="chat-header">
-          <h3>Live Chat</h3>
-          <span class="close" onclick="toggleChat()" aria-label="Close Chat">&times;</span>
-        </div>
-        <div class="chat-messages">
-          <p>Welcome! How can we help you?</p>
-        </div>
-        <input type="text" id="chat-input" placeholder="Type your message..." aria-label="Chat input" />
-      </div>
+  </div>
+  <div
+    class="slide"
+    style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_big/5ae0f343d4c1d/andy-rachel-berliner-our-family.jpg');"
+  >
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <h1>Innovative Taste</h1>
+      <p>Experience real flavor with sustainable innovation.</p>
+      <a href="products.html" class="btn">Explore Products</a>
     </div>
+  </div>
+  <!-- Slider Navigation Dots -->
+  <div class="slider-dots">
+    <span class="dot active" onclick="showSlide(0)"></span>
+    <span class="dot" onclick="showSlide(1)"></span>
+  </div>
+</section>
+
+
+      <!-- Featured Products Section -->
+<!-- In index.html -->
+<section class="featured-products">
+  <h2>Featured Products</h2>
+  <div class="product-grid" id="featured-products">
+    <!-- 8 products will be loaded here -->
+  </div>
+</section>
+
+
+      <!-- Testimonials Section -->
+      <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-container">
+          <div class="testimonial">
+            <p>"THIS™ has completely changed my view on plant-based food. The taste is extraordinary!"</p>
+            <h4>- Alex</h4>
+          </div>
+          <div class="testimonial">
+            <p>"Finally, a product that combines quality with sustainability. I'm in love!"</p>
+            <h4>- Jamie</h4>
+          </div>
+          <div class="testimonial">
+            <p>"Every bite is bursting with flavor. THIS™ is truly setting a new standard."</p>
+            <h4>- Morgan</h4>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call To Action Section -->
+      <section class="cta">
+        <h2>Join the Plant-Based Revolution</h2>
+        <p>Stay updated with our latest products and exclusive offers.</p>
+        <a href="subscribe.html" class="btn">Subscribe Now</a>
+      </section>
+
+      <!-- Extended Product Showcase Section -->
+      <section class="extended-products">
+        <h2>Explore Our Full Range</h2>
+        <div class="product-grid" id="extended-products">
+          <!-- All products loaded dynamically via scripts.js -->
+        </div>
+        <a href="products.html" class="btn">View All Products</a>
+      </section>
+    </main>
 
     <footer>
       <p>&copy; 2025 THIS™. All rights reserved.</p>
     </footer>
-
     <script src="scripts.js"></script>
   </body>
 </html>
