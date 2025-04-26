@@ -1,0 +1,124 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "title": "Modern Laptop Pro",
+      "price": 1299.99,
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80",
+      "description": "Powerful laptop with the latest processor and stunning display.",
+      "featured": true,
+      "new": false
+    },
+    {
+      "id": 2,
+      "title": "Wireless Noise-Cancelling Headphones",
+      "price": 249.99,
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
+      "description": "Premium wireless headphones with active noise cancellation.",
+      "featured": true,
+      "new": false
+    },
+    {
+      "id": 3,
+      "title": "Smart Fitness Watch",
+      "price": 199.99,
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
+      "description": "Track your fitness goals with this smart watch featuring heart rate monitoring.",
+      "featured": false,
+      "new": true
+    },
+    {
+      "id": 4,
+      "title": "Designer T-Shirt",
+      "price": 49.99,
+      "category": "clothing",
+      "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80",
+      "description": "Premium cotton t-shirt with modern design.",
+      "featured": false,
+      "new": true
+    },
+    {
+      "id": 5,
+      "title": "Slim Fit Jeans",
+      "price": 79.99,
+      "category": "clothing",
+      "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80",
+      "description": "Comfortable slim fit jeans perfect for any occasion.",
+      "featured": true,
+      "new": false
+    },
+    {
+      "id": 6,
+      "title": "Running Shoes",
+      "price": 129.99,
+      "category": "footwear",
+      "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
+      "description": "Lightweight running shoes with excellent support and cushioning.",
+      "featured": true,
+      "new": false
+    },
+    {
+      "id": 7,
+      "title": "Mechanical Keyboard",
+      "price": 149.99,
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1595225476474-57ff36594559?auto=format&fit=crop&w=600&q=80",
+      "description": "Tactile mechanical keyboard with RGB backlighting for gaming and typing.",
+      "featured": false,
+      "new": true
+    },
+    {
+      "id": 8,
+      "title": "Smart Home Speaker",
+      "price": 199.99,
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1589492477829-5e65395b66cc?auto=format&fit=crop&w=600&q=80",
+      "description": "Voice-controlled smart speaker with premium sound quality.",
+      "featured": true,
+      "new": false
+    },
+    {
+      "id": 9,
+      "title": "Winter Jacket",
+      "price": 149.99,
+      "category": "clothing",
+      "image": "https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=600&q=80",
+      "description": "Warm and stylish winter jacket with water-resistant outer shell.",
+      "featured": false,
+      "new": true
+    },
+    {
+      "id": 10,
+      "title": "Leather Wallet",
+      "price": 59.99,
+      "category": "accessories",
+      "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
+      "description": "Genuine leather wallet with multiple card slots and cash compartment.",
+      "featured": true,
+      "new": false
+    },
+    {
+      "id": 11,
+      "title": "Wireless Earbuds",
+      "price": 129.99,
+      "category": "electronics",
+      "image": "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f37?auto=format&fit=crop&w=600&q=80",
+      "description": "True wireless earbuds with long battery life and crystal clear sound.",
+      "featured": false,
+      "new": true
+    },
+    {
+      "id": 12,
+      "title": "Casual Sneakers",
+      "price": 89.99,
+      "category": "footwear",
+      "image": "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80",
+      "description": "Stylish and comfortable casual sneakers for everyday wear.",
+      "featured": true,
+      "new": true
+    }
+  ]
+}

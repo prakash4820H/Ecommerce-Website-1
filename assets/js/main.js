@@ -58,8 +58,17 @@ if (mobileMenuBtn) {
 if (searchForm) {
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    state.filters.search = searchInput.value.trim().toLowerCase();
-    filterProducts();
+    performSearch();
+  });
+}
+
+if (searchInput) {
+  // Add keyup event for real-time searching
+  searchInput.addEventListener("keyup", function (e) {
+    // Only search if there are 3 or more characters or if the field is empty
+    if (searchInput.value.length >= 3 || searchInput.value.length === 0) {
+      performSearch();
+    }
   });
 }
 
@@ -108,6 +117,50 @@ if (checkoutBtn) {
   });
 }
 
+// Toggle search bar when search icon is clicked
+const searchIcon = document.querySelector('.nav-icon[aria-label="Search"]');
+const searchContainer = document.querySelector(".search-container");
+
+if (searchIcon && searchContainer) {
+  searchIcon.addEventListener("click", function (e) {
+    e.preventDefault();
+    searchContainer.style.display =
+      searchContainer.style.display === "block" ? "none" : "block";
+    if (searchContainer.style.display === "block") {
+      document.getElementById("search-input").focus();
+    }
+  });
+}
+
+// Toggle filter container on mobile
+const filterToggle = document.getElementById("filter-toggle");
+const filterContainer = document.getElementById("filter-container");
+
+if (filterToggle && filterContainer) {
+  filterToggle.addEventListener("click", function () {
+    filterContainer.classList.toggle("show");
+    this.innerHTML = filterContainer.classList.contains("show")
+      ? '<i class="fas fa-times"></i> Hide Filters'
+      : '<i class="fas fa-filter"></i> Show Filters';
+  });
+}
+
+// Initialize range slider for price filter if it exists
+const priceRange = document.getElementById("price-range");
+if (priceRange) {
+  // We'd normally use noUiSlider or similar library
+  // For now we'll use a placeholder
+  priceRange.addEventListener("input", function () {
+    const value = this.value.split(",");
+    if (document.getElementById("min-price-display")) {
+      document.getElementById("min-price-display").textContent = `$${value[0]}`;
+    }
+    if (document.getElementById("max-price-display")) {
+      document.getElementById("max-price-display").textContent = `$${value[1]}`;
+    }
+  });
+}
+
 // Initialize App
 function initApp() {
   loadProducts();
@@ -121,6 +174,18 @@ function initApp() {
 async function loadProducts() {
   try {
     // In a real app, this would be an API call
+    // For now, we'll load from the JSON file
+    const response = await fetch("/assets/data/products.json");
+    const data = await response.json();
+
+    if (data && data.products) {
+      state.products = data.products;
+      state.filteredProducts = [...state.products];
+      renderProducts();
+    }
+  } catch (error) {
+    console.error("Error loading products:", error);
+    // Fallback to hardcoded products if loading fails
     state.products = [
       {
         id: 1,
@@ -131,44 +196,21 @@ async function loadProducts() {
           "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80",
         description:
           "Powerful laptop with the latest processor and stunning display.",
+        featured: true,
+        new: false,
       },
+      // Add a few more products as fallback
       {
         id: 2,
-        name: "Wireless Noise-Cancelling Headphones",
+        name: "Wireless Headphones",
         price: 249.99,
         category: "electronics",
         image:
           "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80",
         description:
           "Premium wireless headphones with active noise cancellation.",
-      },
-      {
-        id: 3,
-        name: "Smart Fitness Watch",
-        price: 199.99,
-        category: "electronics",
-        image:
-          "https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80",
-        description:
-          "Track your fitness goals with this smart watch featuring heart rate monitoring.",
-      },
-      {
-        id: 4,
-        name: "Designer T-Shirt",
-        price: 49.99,
-        category: "clothing",
-        image:
-          "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80",
-        description: "Premium cotton t-shirt with modern design.",
-      },
-      {
-        id: 5,
-        name: "Slim Fit Jeans",
-        price: 79.99,
-        category: "clothing",
-        image:
-          "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80",
-        description: "Comfortable slim fit jeans perfect for any occasion.",
+        featured: true,
+        new: false,
       },
       {
         id: 6,
@@ -179,74 +221,18 @@ async function loadProducts() {
           "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80",
         description:
           "Lightweight running shoes with excellent support and cushioning.",
-      },
-      {
-        id: 7,
-        name: "Mechanical Keyboard",
-        price: 149.99,
-        category: "electronics",
-        image:
-          "https://images.unsplash.com/photo-1595225476474-57ff36594559?auto=format&fit=crop&w=600&q=80",
-        description:
-          "Tactile mechanical keyboard with RGB backlighting for gaming and typing.",
-      },
-      {
-        id: 8,
-        name: "Smart Home Speaker",
-        price: 199.99,
-        category: "electronics",
-        image:
-          "https://images.unsplash.com/photo-1589492477829-5e65395b66cc?auto=format&fit=crop&w=600&q=80",
-        description:
-          "Voice-controlled smart speaker with premium sound quality.",
-      },
-      {
-        id: 9,
-        name: "Winter Jacket",
-        price: 149.99,
-        category: "clothing",
-        image:
-          "https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=600&q=80",
-        description:
-          "Warm and stylish winter jacket with water-resistant outer shell.",
-      },
-      {
-        id: 10,
-        name: "Leather Wallet",
-        price: 59.99,
-        category: "accessories",
-        image:
-          "https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80",
-        description:
-          "Genuine leather wallet with multiple card slots and cash compartment.",
-      },
-      {
-        id: 11,
-        name: "Wireless Earbuds",
-        price: 129.99,
-        category: "electronics",
-        image:
-          "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f37?auto=format&fit=crop&w=600&q=80",
-        description:
-          "True wireless earbuds with long battery life and crystal clear sound.",
-      },
-      {
-        id: 12,
-        name: "Casual Sneakers",
-        price: 89.99,
-        category: "footwear",
-        image:
-          "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80",
-        description:
-          "Stylish and comfortable casual sneakers for everyday wear.",
+        featured: true,
+        new: false,
       },
     ];
 
     state.filteredProducts = [...state.products];
     renderProducts();
-  } catch (error) {
-    console.error("Error loading products:", error);
-    showMessage("Failed to load products. Please try again later.", "error");
+
+    showMessage(
+      "Failed to load all products. Showing limited selection.",
+      "error"
+    );
   }
 }
 
@@ -538,3 +524,88 @@ function initSlider() {
 window.addToCart = addToCart;
 window.updateCartQuantity = updateCartQuantity;
 window.removeFromCart = removeFromCart;
+
+function performSearch() {
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+  const resultsContainer = document.getElementById("search-results");
+
+  if (!resultsContainer) return;
+
+  // Check if query is empty
+  if (query === "") {
+    resultsContainer.innerHTML = "";
+    resultsContainer.style.display = "none";
+    return;
+  }
+
+  // Filter products based on search query
+  const filteredProducts = state.products.filter((product) => {
+    return (
+      product.name.toLowerCase().includes(query) ||
+      product.category.toLowerCase().includes(query) ||
+      (product.description && product.description.toLowerCase().includes(query))
+    );
+  });
+
+  // Display results
+  if (filteredProducts.length === 0) {
+    resultsContainer.innerHTML = '<p class="text-center">No results found</p>';
+  } else {
+    let html = '<div class="search-results-header">';
+    html += `<h3>${filteredProducts.length} result${
+      filteredProducts.length !== 1 ? "s" : ""
+    } found</h3>`;
+    html +=
+      '<button class="close-search" aria-label="Close search"><i class="fas fa-times"></i></button>';
+    html += "</div>";
+    html += '<div class="search-results-grid">';
+
+    filteredProducts.forEach((product) => {
+      html += `
+        <div class="search-result-item">
+          <img src="${product.image}" alt="${
+        product.name
+      }" class="search-result-img">
+          <div class="search-result-info">
+            <h4>${product.name}</h4>
+            <p class="search-result-price">$${product.price.toFixed(2)}</p>
+            <p class="search-result-category">${product.category}</p>
+            <div class="search-result-actions">
+              <a href="pages/product.html?id=${
+                product.id
+              }" class="btn btn-sm">View Details</a>
+              <button class="btn btn-sm add-to-cart" data-id="${
+                product.id
+              }">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += "</div>";
+    resultsContainer.innerHTML = html;
+
+    // Add event listener to close button
+    const closeButton = resultsContainer.querySelector(".close-search");
+    if (closeButton) {
+      closeButton.addEventListener("click", function () {
+        resultsContainer.innerHTML = "";
+        resultsContainer.style.display = "none";
+        searchInput.value = "";
+      });
+    }
+
+    // Add event listeners to "Add to Cart" buttons
+    const addToCartButtons = resultsContainer.querySelectorAll(".add-to-cart");
+    addToCartButtons.forEach((button) => {
+      button.addEventListener("click", function () {
+        const productId = parseInt(this.dataset.id);
+        addToCart(productId);
+      });
+    });
+  }
+
+  // Show results container
+  resultsContainer.style.display = "block";
+}

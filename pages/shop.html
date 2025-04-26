@@ -88,107 +88,82 @@
       <!-- Shop Section -->
       <section class="shop-section">
         <div class="container">
-          <div class="shop-grid">
-            <!-- Sidebar - Filters -->
-            <aside class="shop-sidebar">
-              <div class="sidebar-section">
-                <h3>Search Products</h3>
-                <form id="search-form" class="search-form">
-                  <div class="search-input-group">
-                    <input
-                      type="text"
-                      id="search-input"
-                      placeholder="Search for products..."
-                    />
-                    <button type="submit" class="search-btn">
-                      <i class="fas fa-search"></i>
-                    </button>
-                  </div>
-                </form>
-              </div>
+          <div class="shop-header">
+            <h1>Shop All Products</h1>
+            <p>Browse our complete collection of high-quality products.</p>
+          </div>
 
-              <div class="sidebar-section">
-                <h3>Categories</h3>
-                <form id="filter-form">
-                  <div class="filter-group">
-                    <select id="category-select" class="filter-select">
-                      <option value="all">All Categories</option>
-                      <option value="electronics">Electronics</option>
-                      <option value="clothing">Clothing</option>
-                      <option value="footwear">Footwear</option>
-                      <option value="accessories">Accessories</option>
+          <div class="shop-content">
+            <!-- Filter Toggle for Mobile -->
+            <button class="filter-toggle" id="filter-toggle">
+              <i class="fas fa-filter"></i> Show Filters
+            </button>
+
+            <div class="shop-grid">
+              <!-- Sidebar with Filters -->
+              <aside class="shop-sidebar">
+                <div class="filter-container" id="filter-container">
+                  <h3>Filters</h3>
+                  <form id="filter-form">
+                    <div class="filter-group">
+                      <h4>Categories</h4>
+                      <select id="category-filter" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="footwear">Footwear</option>
+                        <option value="accessories">Accessories</option>
+                      </select>
+                    </div>
+
+                    <div class="filter-group">
+                      <h4>Price Range</h4>
+                      <div class="price-filter" id="price-filter">
+                        <input
+                          type="range"
+                          min="0"
+                          max="1000"
+                          value="0,1000"
+                          class="price-range"
+                          id="price-range"
+                          multiple
+                        />
+                        <div class="price-display">
+                          <span id="min-price-display">$0</span>
+                          <span id="max-price-display">$1000</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button id="reset-filters" class="reset-filters">
+                      Reset Filters
+                    </button>
+                  </form>
+                </div>
+              </aside>
+
+              <!-- Product List -->
+              <div class="shop-main">
+                <div class="shop-controls">
+                  <div class="shop-count">
+                    <span id="product-count">12</span> Products
+                  </div>
+
+                  <div class="shop-sort">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" class="sort-select">
+                      <option value="default">Default</option>
+                      <option value="price-low-high">Price: Low to High</option>
+                      <option value="price-high-low">Price: High to Low</option>
+                      <option value="name-a-z">Name: A to Z</option>
+                      <option value="name-z-a">Name: Z to A</option>
                     </select>
                   </div>
-
-                  <div class="filter-group">
-                    <h4>Price Range</h4>
-                    <div class="price-filter">
-                      <input
-                        type="number"
-                        id="min-price"
-                        placeholder="Min"
-                        min="0"
-                      />
-                      <span>to</span>
-                      <input
-                        type="number"
-                        id="max-price"
-                        placeholder="Max"
-                        min="0"
-                      />
-                    </div>
-                    <button type="button" id="apply-filters" class="btn btn-sm">
-                      Apply Filters
-                    </button>
-                  </div>
-                </form>
-              </div>
-
-              <div class="sidebar-section">
-                <h3>Sort By</h3>
-                <select id="sort-select" class="filter-select">
-                  <option value="default">Default</option>
-                  <option value="price-low-high">Price: Low to High</option>
-                  <option value="price-high-low">Price: High to Low</option>
-                  <option value="name-a-z">Name: A to Z</option>
-                  <option value="name-z-a">Name: Z to A</option>
-                </select>
-              </div>
-            </aside>
-
-            <!-- Main Content - Products -->
-            <div class="shop-content">
-              <div class="shop-header">
-                <div class="results-count">
-                  <span id="products-count">0</span> products found
                 </div>
 
-                <div class="view-options">
-                  <button class="view-btn active" data-view="grid">
-                    <i class="fas fa-th"></i>
-                  </button>
-                  <button class="view-btn" data-view="list">
-                    <i class="fas fa-list"></i>
-                  </button>
+                <div class="product-grid" id="products-container">
+                  <!-- Products will be loaded here by JavaScript -->
                 </div>
-              </div>
-
-              <!-- Products Grid -->
-              <div class="product-grid" id="all-products">
-                <!-- Products will be populated by JavaScript -->
-              </div>
-
-              <!-- Pagination -->
-              <div class="pagination">
-                <button class="pagination-btn" id="prev-page" disabled>
-                  <i class="fas fa-chevron-left"></i> Previous
-                </button>
-                <div class="pagination-numbers" id="pagination-numbers">
-                  <!-- Page numbers will be populated by JavaScript -->
-                </div>
-                <button class="pagination-btn" id="next-page">
-                  Next <i class="fas fa-chevron-right"></i>
-                </button>
               </div>
             </div>
           </div>
