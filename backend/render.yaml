@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: jpbaba-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    repo: https://github.com/YOUR_GITHUB_USERNAME/Ecommerce-Website # Update with your actual GitHub repo
+    branch: main
+    envVars:
+      - key: MONGODB_URI
+        sync: false # This means you'll need to manually add this in Render dashboard
+      - key: JWT_SECRET
+        sync: false
+      - key: EMAIL_SERVICE
+        sync: false
+      - key: EMAIL_USERNAME
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: CLIENT_URL
+        value: https://jpbaba-shop.netlify.app # Update later with your actual frontend URL
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000 # Render will use its own PORT env variable
