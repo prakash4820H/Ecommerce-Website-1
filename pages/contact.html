@@ -433,6 +433,48 @@
       .toast-close:hover {
         opacity: 1;
       }
+
+      /* Form validation styles */
+      .form-control.error {
+        border-color: #dc3545;
+        background-color: rgba(220, 53, 69, 0.05);
+      }
+
+      .error-message {
+        color: #dc3545;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+        display: none;
+      }
+
+      .error-message.visible {
+        display: block;
+      }
+
+      /* Toast types */
+      .toast-error {
+        background-color: #dc3545;
+      }
+
+      .toast-info {
+        background-color: #17a2b8;
+      }
+
+      .toast-warning {
+        background-color: #ffc107;
+        color: #212529;
+      }
+
+      /* Make required fields more obvious */
+      .form-label[for]:after {
+        content: "*";
+        color: #dc3545;
+        margin-left: 4px;
+      }
+
+      .form-label[for="phone"]:after {
+        content: "";
+      }
     </style>
   </head>
   <body>
@@ -889,52 +931,84 @@
           contactForm.addEventListener("submit", function (e) {
             e.preventDefault();
 
+            // Basic form validation
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const message = document.getElementById("message").value.trim();
+            const subject = document.getElementById("subject").value;
+
+            if (!name || !email || !message || !subject) {
+              showToast("Please fill in all required fields", "error");
+              return;
+            }
+
+            // Email validation
+            if (!isValidEmail(email)) {
+              showToast("Please enter a valid email address", "error");
+              return;
+            }
+
             // Here you would normally send the form data to your server
             // For demo purposes, we'll just show a success message
+            showToast("Message Sent! Thank you for contacting us.", "success");
 
-            // Create toast notification
-            const toastContainer = document.querySelector(".toast-container");
-            const toast = document.createElement("div");
-            toast.classList.add("toast", "toast-success");
-            toast.innerHTML = `
+            // Reset form
+            contactForm.reset();
+          });
+        }
+
+        function isValidEmail(email) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(email);
+        }
+
+        function showToast(message, type = "info") {
+          // Create toast notification
+          const toastContainer = document.querySelector(".toast-container");
+          const toast = document.createElement("div");
+          toast.classList.add("toast", `toast-${type}`);
+
+          const icon =
+            type === "success"
+              ? "check-circle"
+              : type === "error"
+              ? "exclamation-circle"
+              : "info-circle";
+
+          toast.innerHTML = `
             <div class="toast-icon">
-              <i class="fas fa-check-circle"></i>
+              <i class="fas fa-${icon}"></i>
             </div>
             <div class="toast-content">
-              <p class="toast-title">Message Sent!</p>
-              <p class="toast-message">Thank you for contacting us. We'll get back to you soon.</p>
+              <p class="toast-message">${message}</p>
             </div>
             <button class="toast-close" aria-label="Close notification">
               <i class="fas fa-times"></i>
             </button>
           `;
 
-            toastContainer.appendChild(toast);
+          toastContainer.appendChild(toast);
 
-            // Show toast
+          // Show toast
+          setTimeout(() => {
+            toast.classList.add("show");
+          }, 100);
+
+          // Auto remove toast after 5 seconds
+          setTimeout(() => {
+            toast.classList.remove("show");
             setTimeout(() => {
-              toast.classList.add("show");
-            }, 100);
+              toast.remove();
+            }, 300);
+          }, 5000);
 
-            // Auto remove toast after 5 seconds
+          // Close toast on click
+          const closeBtn = toast.querySelector(".toast-close");
+          closeBtn.addEventListener("click", function () {
+            toast.classList.remove("show");
             setTimeout(() => {
-              toast.classList.remove("show");
-              setTimeout(() => {
-                toast.remove();
-              }, 300);
-            }, 5000);
-
-            // Close toast on click
-            const closeBtn = toast.querySelector(".toast-close");
-            closeBtn.addEventListener("click", function () {
-              toast.classList.remove("show");
-              setTimeout(() => {
-                toast.remove();
-              }, 300);
-            });
-
-            // Reset form
-            contactForm.reset();
+              toast.remove();
+            }, 300);
           });
         }
       });

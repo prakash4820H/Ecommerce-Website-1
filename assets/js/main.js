@@ -32,6 +32,8 @@ let state = {
 // Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
   initApp();
+  initScrollToTop();
+  initMobileMenuOverlay();
 });
 
 // Mobile Menu Toggle
@@ -151,14 +153,221 @@ if (priceRange) {
   // We'd normally use noUiSlider or similar library
   // For now we'll use a placeholder
   priceRange.addEventListener("input", function () {
-    const value = this.value.split(",");
+    // Get the value of the range slider
+    const value = this.value;
+    // Default to minimum value
+    const minPrice = 0;
+    // Parse the max value as a number
+    const maxPrice = parseInt(value, 10) || 1000;
+
+    // Update the display elements
     if (document.getElementById("min-price-display")) {
-      document.getElementById("min-price-display").textContent = `$${value[0]}`;
+      document.getElementById("min-price-display").textContent = `$${minPrice}`;
     }
     if (document.getElementById("max-price-display")) {
-      document.getElementById("max-price-display").textContent = `$${value[1]}`;
+      document.getElementById("max-price-display").textContent = `$${maxPrice}`;
     }
+
+    // Update the filter state
+    state.filters.minPrice = minPrice;
+    state.filters.maxPrice = maxPrice;
+
+    // Apply filtering
+    filterProducts();
   });
+}
+
+// Initialize filter elements
+function initFilters() {
+  // Initialize range sliders
+  const minRangeSlider = document.querySelector(".min-price-range");
+  const maxRangeSlider = document.querySelector(".max-price-range");
+  const minPriceInput = document.getElementById("min-price");
+  const maxPriceInput = document.getElementById("max-price");
+
+  if (minRangeSlider && maxRangeSlider) {
+    // Update range sliders based on input values
+    minPriceInput.addEventListener("input", function () {
+      minRangeSlider.value = this.value;
+      updateSliderTrack();
+      filterProducts();
+    });
+
+    maxPriceInput.addEventListener("input", function () {
+      maxRangeSlider.value = this.value;
+      updateSliderTrack();
+      filterProducts();
+    });
+
+    // Update input values based on range sliders
+    minRangeSlider.addEventListener("input", function () {
+      const minVal = parseInt(this.value);
+      const maxVal = parseInt(maxRangeSlider.value);
+
+      if (minVal > maxVal) {
+        this.value = maxVal;
+        minPriceInput.value = maxVal;
+      } else {
+        minPriceInput.value = minVal;
+      }
+
+      updateSliderTrack();
+      filterProducts();
+    });
+
+    maxRangeSlider.addEventListener("input", function () {
+      const minVal = parseInt(minRangeSlider.value);
+      const maxVal = parseInt(this.value);
+
+      if (maxVal < minVal) {
+        this.value = minVal;
+        maxPriceInput.value = minVal;
+      } else {
+        maxPriceInput.value = maxVal;
+      }
+
+      updateSliderTrack();
+      filterProducts();
+    });
+
+    // Function to update the slider track appearance
+    function updateSliderTrack() {
+      const minVal = parseInt(minRangeSlider.value);
+      const maxVal = parseInt(maxRangeSlider.value);
+      const track = document.querySelector(".slider-track");
+
+      if (track) {
+        const min = parseInt(minRangeSlider.min);
+        const max = parseInt(minRangeSlider.max);
+        const minPercent = ((minVal - min) / (max - min)) * 100;
+        const maxPercent = ((maxVal - min) / (max - min)) * 100;
+
+        track.style.background = `linear-gradient(to right, #ddd ${minPercent}%, var(--primary-color) ${minPercent}%, var(--primary-color) ${maxPercent}%, #ddd ${maxPercent}%)`;
+      }
+    }
+
+    // Initialize slider track
+    updateSliderTrack();
+  }
+
+  // Add event listeners to filter checkboxes and radio buttons
+  const filterCheckboxes = document.querySelectorAll(
+    '.checkbox-container input[type="checkbox"]'
+  );
+  const filterRadios = document.querySelectorAll(
+    '.rating-container input[type="radio"]'
+  );
+
+  filterCheckboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      // If the "All Categories" or "All Brands" checkbox is checked, uncheck the other options
+      if (checkbox.value === "all") {
+        const name = checkbox.getAttribute("name");
+        if (checkbox.checked) {
+          document
+            .querySelectorAll(`input[name="${name}"]:not([value="all"])`)
+            .forEach((cb) => {
+              cb.checked = false;
+            });
+        }
+      } else {
+        // If any other option is checked, uncheck the "All" option
+        const name = checkbox.getAttribute("name");
+        if (checkbox.checked) {
+          const allOption = document.querySelector(
+            `input[name="${name}"][value="all"]`
+          );
+          if (allOption) {
+            allOption.checked = false;
+          }
+        }
+      }
+
+      filterProducts();
+    });
+  });
+
+  filterRadios.forEach((radio) => {
+    radio.addEventListener("change", filterProducts);
+  });
+
+  // Reset filters button
+  const resetFiltersBtn = document.getElementById("reset-filters");
+  if (resetFiltersBtn) {
+    resetFiltersBtn.addEventListener("click", resetFilters);
+  }
+
+  // Apply filters button (for mobile)
+  const applyFiltersBtn = document.querySelector(".apply-filters-btn");
+  if (applyFiltersBtn) {
+    applyFiltersBtn.addEventListener("click", () => {
+      const filterContainer = document.getElementById("filter-container");
+      if (filterContainer) {
+        filterContainer.classList.remove("show");
+      }
+    });
+  }
+}
+
+// Reset all filters to default values
+function resetFilters() {
+  // Reset category checkboxes
+  const allCategoryCheckbox = document.querySelector(
+    'input[name="category"][value="all"]'
+  );
+  if (allCategoryCheckbox) {
+    allCategoryCheckbox.checked = true;
+    document
+      .querySelectorAll('input[name="category"]:not([value="all"])')
+      .forEach((cb) => {
+        cb.checked = false;
+      });
+  }
+
+  // Reset brand checkboxes
+  const allBrandCheckbox = document.querySelector(
+    'input[name="brand"][value="all"]'
+  );
+  if (allBrandCheckbox) {
+    allBrandCheckbox.checked = true;
+    document
+      .querySelectorAll('input[name="brand"]:not([value="all"])')
+      .forEach((cb) => {
+        cb.checked = false;
+      });
+  }
+
+  // Reset rating radios
+  document.querySelectorAll('input[name="rating"]').forEach((radio) => {
+    radio.checked = false;
+  });
+
+  // Reset discount checkboxes
+  document.querySelectorAll('input[name="discount"]').forEach((cb) => {
+    cb.checked = false;
+  });
+
+  // Reset price range
+  const minPriceInput = document.getElementById("min-price");
+  const maxPriceInput = document.getElementById("max-price");
+  const minRangeSlider = document.querySelector(".min-price-range");
+  const maxRangeSlider = document.querySelector(".max-price-range");
+
+  if (minPriceInput && maxPriceInput && minRangeSlider && maxRangeSlider) {
+    minPriceInput.value = 0;
+    maxPriceInput.value = 1000;
+    minRangeSlider.value = 0;
+    maxRangeSlider.value = 1000;
+
+    // Update slider track
+    const track = document.querySelector(".slider-track");
+    if (track) {
+      track.style.background = `linear-gradient(to right, #ddd 0%, var(--primary-color) 0%, var(--primary-color) 100%, #ddd 100%)`;
+    }
+  }
+
+  // Apply filters
+  filterProducts();
 }
 
 // Initialize App
@@ -168,23 +377,60 @@ function initApp() {
 
   // Initialize any sliders or carousels
   initSlider();
+
+  // Initialize filters
+  initFilters();
 }
 
 // Load Products
 async function loadProducts() {
   try {
+    // Show loading state if product grid exists
+    if (productGrid) {
+      productGrid.innerHTML =
+        '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Loading products...</p></div>';
+    }
+
     // In a real app, this would be an API call
     // For now, we'll load from the JSON file
-    const response = await fetch("/assets/data/products.json");
+    const response = await fetch("../assets/data/products.json");
+
+    // Check if response is ok
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch products: ${response.status} ${response.statusText}`
+      );
+    }
+
     const data = await response.json();
 
     if (data && data.products) {
       state.products = data.products;
       state.filteredProducts = [...state.products];
       renderProducts();
+
+      // Update product count if element exists
+      const productCount = document.getElementById("product-count");
+      if (productCount) {
+        productCount.textContent = state.products.length;
+      }
+    } else {
+      throw new Error("Invalid product data format");
     }
   } catch (error) {
     console.error("Error loading products:", error);
+
+    // Show error message in product grid if it exists
+    if (productGrid) {
+      productGrid.innerHTML = `
+        <div class="error-message">
+          <i class="fas fa-exclamation-circle"></i>
+          <p>Failed to load products. Please try again later.</p>
+          <button class="btn btn-sm" onclick="loadProducts()">Retry</button>
+        </div>
+      `;
+    }
+
     // Fallback to hardcoded products if loading fails
     state.products = [
       {
@@ -277,7 +523,8 @@ function addToCart(productId) {
 
   saveCart();
   updateCartDisplay();
-  showMessage(`${product.name} added to your cart!`, "success");
+  const productName = product.title || product.name;
+  showMessage(`${productName} added to your cart!`, "success");
 }
 
 // Update Cart Item Quantity
@@ -366,6 +613,10 @@ function updateCartDisplay() {
 function renderProducts() {
   if (!productGrid) return;
 
+  // Show loading state
+  productGrid.innerHTML =
+    '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Loading products...</p></div>';
+
   if (state.filteredProducts.length === 0) {
     productGrid.innerHTML =
       '<p class="text-center">No products found matching your criteria.</p>';
@@ -375,16 +626,68 @@ function renderProducts() {
   let productsHtml = "";
 
   state.filteredProducts.forEach((product) => {
+    const name = product.name || product.title;
+    // Calculate discount price if applicable
+    let displayPrice = product.price;
+    let oldPrice = "";
+    if (product.discount && product.discount > 0) {
+      const discountedPrice = product.price * (1 - product.discount / 100);
+      oldPrice = `<span class="old-price">$${product.price.toFixed(2)}</span>`;
+      displayPrice = discountedPrice;
+    }
+
+    // Generate rating stars
+    let ratingStars = "";
+    if (product.rating) {
+      ratingStars = '<div class="product-rating">';
+      // Full stars
+      for (let i = 1; i <= Math.floor(product.rating); i++) {
+        ratingStars += '<i class="fas fa-star"></i>';
+      }
+      // Half star if needed
+      if (product.rating % 1 >= 0.5) {
+        ratingStars += '<i class="fas fa-star-half-alt"></i>';
+      }
+      // Empty stars
+      for (let i = Math.ceil(product.rating); i < 5; i++) {
+        ratingStars += '<i class="far fa-star"></i>';
+      }
+      ratingStars += "</div>";
+    }
+
+    // Add product badges (new, discount)
+    let badges = "";
+    if (product.new) {
+      badges += '<span class="product-badge new-badge">New</span>';
+    }
+    if (product.discount && product.discount > 0) {
+      badges += `<span class="product-badge discount-badge">-${product.discount}%</span>`;
+    }
+
     productsHtml += `
       <div class="product-card" data-id="${product.id}">
-        <img src="${product.image}" alt="${product.name}" class="product-img">
+        <div class="product-img-container">
+          <img src="${product.image}" alt="${name}" class="product-img">
+          ${badges}
+        </div>
         <div class="product-info">
-          <h3 class="product-title">${product.name}</h3>
-          <p class="product-price">$${product.price.toFixed(2)}</p>
+          <h3 class="product-title">${name}</h3>
+          <div class="product-meta">
+            <p class="product-price">${oldPrice}$${displayPrice.toFixed(2)}</p>
+            ${ratingStars}
+          </div>
+          <p class="product-brand">${product.brand || ""}</p>
           <p class="product-description">${product.description}</p>
-          <button class="btn" onclick="addToCart(${
-            product.id
-          })">Add to Cart</button>
+          <div class="product-actions">
+            <button class="btn add-to-cart-btn" onclick="addToCart(${
+              product.id
+            })">
+              <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+            <button class="btn-sm wishlist-btn" aria-label="Add to Wishlist">
+              <i class="far fa-heart"></i>
+            </button>
+          </div>
         </div>
       </div>
     `;
@@ -396,33 +699,112 @@ function renderProducts() {
 // Filter Products
 function filterProducts() {
   state.filteredProducts = state.products.filter((product) => {
-    // Category filter
-    if (
-      state.filters.category !== "all" &&
-      product.category !== state.filters.category
-    ) {
-      return false;
+    // Category filter (using checkbox)
+    const categoryCheckboxes = document.querySelectorAll(
+      'input[name="category"]:checked'
+    );
+    if (categoryCheckboxes.length > 0) {
+      // If "All Categories" is checked, don't filter by category
+      const allCategoriesChecked = Array.from(categoryCheckboxes).some(
+        (cb) => cb.value === "all"
+      );
+      if (!allCategoriesChecked) {
+        // Get all selected categories
+        const selectedCategories = Array.from(categoryCheckboxes).map(
+          (cb) => cb.value
+        );
+        if (!selectedCategories.includes(product.category)) {
+          return false;
+        }
+      }
+    }
+
+    // Brand filter (using checkbox)
+    const brandCheckboxes = document.querySelectorAll(
+      'input[name="brand"]:checked'
+    );
+    if (brandCheckboxes.length > 0) {
+      // If "All Brands" is checked, don't filter by brand
+      const allBrandsChecked = Array.from(brandCheckboxes).some(
+        (cb) => cb.value === "all"
+      );
+      if (!allBrandsChecked) {
+        // Get all selected brands
+        const selectedBrands = Array.from(brandCheckboxes).map(
+          (cb) => cb.value
+        );
+        if (!selectedBrands.includes(product.brand.toLowerCase())) {
+          return false;
+        }
+      }
+    }
+
+    // Rating filter (using radio)
+    const ratingRadio = document.querySelector('input[name="rating"]:checked');
+    if (ratingRadio) {
+      const minRating = parseInt(ratingRadio.value, 10);
+      if (product.rating < minRating) {
+        return false;
+      }
+    }
+
+    // Discount filter (using checkbox)
+    const discountCheckboxes = document.querySelectorAll(
+      'input[name="discount"]:checked'
+    );
+    if (discountCheckboxes.length > 0) {
+      const selectedDiscounts = Array.from(discountCheckboxes).map((cb) =>
+        parseInt(cb.value, 10)
+      );
+      // Check if product has at least the minimum discount from any selected options
+      const hasRequiredDiscount = selectedDiscounts.some(
+        (minDiscount) => product.discount >= minDiscount
+      );
+      if (!hasRequiredDiscount) {
+        return false;
+      }
     }
 
     // Price range filter
-    if (
-      product.price < state.filters.minPrice ||
-      product.price > state.filters.maxPrice
-    ) {
+    const minPrice = document.getElementById("min-price")
+      ? parseFloat(document.getElementById("min-price").value) || 0
+      : state.filters.minPrice;
+
+    const maxPrice = document.getElementById("max-price")
+      ? parseFloat(document.getElementById("max-price").value) || 1000
+      : state.filters.maxPrice;
+
+    if (product.price < minPrice || product.price > maxPrice) {
       return false;
     }
 
     // Search filter
     if (
       state.filters.search &&
-      !product.name.toLowerCase().includes(state.filters.search) &&
-      !product.description.toLowerCase().includes(state.filters.search)
+      !(product.title || product.name || "")
+        .toLowerCase()
+        .includes(state.filters.search.toLowerCase()) &&
+      !(product.description || "")
+        .toLowerCase()
+        .includes(state.filters.search.toLowerCase()) &&
+      !(product.category || "")
+        .toLowerCase()
+        .includes(state.filters.search.toLowerCase()) &&
+      !(product.brand || "")
+        .toLowerCase()
+        .includes(state.filters.search.toLowerCase())
     ) {
       return false;
     }
 
     return true;
   });
+
+  // Update product count display
+  const productCount = document.getElementById("product-count");
+  if (productCount) {
+    productCount.textContent = state.filteredProducts.length;
+  }
 
   renderProducts();
 }
@@ -540,10 +922,11 @@ function performSearch() {
 
   // Filter products based on search query
   const filteredProducts = state.products.filter((product) => {
+    const name = product.title || product.name || "";
     return (
-      product.name.toLowerCase().includes(query) ||
-      product.category.toLowerCase().includes(query) ||
-      (product.description && product.description.toLowerCase().includes(query))
+      name.toLowerCase().includes(query) ||
+      (product.category || "").toLowerCase().includes(query) ||
+      (product.description || "").toLowerCase().includes(query)
     );
   });
 
@@ -561,13 +944,14 @@ function performSearch() {
     html += '<div class="search-results-grid">';
 
     filteredProducts.forEach((product) => {
+      const productName = product.title || product.name;
       html += `
         <div class="search-result-item">
-          <img src="${product.image}" alt="${
-        product.name
-      }" class="search-result-img">
+          <img src="${
+            product.image
+          }" alt="${productName}" class="search-result-img">
           <div class="search-result-info">
-            <h4>${product.name}</h4>
+            <h4>${productName}</h4>
             <p class="search-result-price">$${product.price.toFixed(2)}</p>
             <p class="search-result-category">${product.category}</p>
             <div class="search-result-actions">
@@ -608,4 +992,70 @@ function performSearch() {
 
   // Show results container
   resultsContainer.style.display = "block";
+}
+
+// Initialize scroll to top button
+function initScrollToTop() {
+  // Create the button if it doesn't exist
+  if (!document.querySelector(".scroll-to-top")) {
+    const scrollBtn = document.createElement("div");
+    scrollBtn.className = "scroll-to-top";
+    scrollBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    document.body.appendChild(scrollBtn);
+
+    scrollBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Show/hide button based on scroll position
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        scrollBtn.classList.add("visible");
+      } else {
+        scrollBtn.classList.remove("visible");
+      }
+    });
+  }
+}
+
+// Initialize mobile menu overlay
+function initMobileMenuOverlay() {
+  // Create overlay element if it doesn't exist
+  if (!document.querySelector(".mobile-menu-overlay")) {
+    const overlay = document.createElement("div");
+    overlay.className = "mobile-menu-overlay";
+    document.body.appendChild(overlay);
+
+    // When mobile menu button is clicked
+    if (mobileMenuBtn) {
+      const originalClickHandler = mobileMenuBtn.onclick;
+
+      mobileMenuBtn.onclick = function (e) {
+        // Toggle overlay active class
+        overlay.classList.toggle("active");
+
+        // Call original handler if it exists
+        if (originalClickHandler) {
+          originalClickHandler.call(this, e);
+        }
+      };
+
+      // Close menu when overlay is clicked
+      overlay.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        overlay.classList.remove("active");
+
+        const icon = mobileMenuBtn.querySelector("i");
+        if (icon.classList.contains("fa-times")) {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+      });
+    }
+  }
 }
