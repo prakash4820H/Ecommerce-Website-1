@@ -211,6 +211,23 @@
   text-align: right;
 }
 
+.cart-item-actions .btn-sm {
+  background-color: #f8f8f8;
+  color: #e74c3c;
+  border: 1px solid #e1e1e1;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.cart-item-actions .btn-sm:hover {
+  background-color: #e74c3c;
+  color: white;
+  border-color: #e74c3c;
+}
+
 .item-total {
   font-weight: 700;
   margin-bottom: 10px;
@@ -233,9 +250,18 @@
 
 .coupon-container {
   margin: 20px 0;
-  padding: 15px;
-  background-color: var(--gray-100);
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px dashed #ddd;
   border-radius: var(--border-radius-sm);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.coupon-container h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  color: #333;
 }
 
 .coupon-form {
@@ -246,6 +272,32 @@
 
 .coupon-form input {
   flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.coupon-form input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(240, 96, 96, 0.1);
+}
+
+.coupon-form .btn-sm {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.coupon-form .btn-sm:hover {
+  background-color: #e04040;
 }
 
 .checkout-actions {

@@ -35,7 +35,26 @@ document.addEventListener("DOMContentLoaded", () => {
   initApp();
   initScrollToTop();
   initMobileMenuOverlay();
+  initSliderButtons();
 });
+
+// Initialize slider buttons to ensure they work correctly
+function initSliderButtons() {
+  const sliderButtons = document.querySelectorAll(".hero-content .btn");
+
+  sliderButtons.forEach((button) => {
+    button.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (href) {
+        // Add loading indication if needed
+        document.body.style.cursor = "progress";
+
+        // Ensure navigation happens
+        window.location.href = href;
+      }
+    });
+  });
+}
 
 // Mobile Menu Toggle
 if (mobileMenuBtn) {
