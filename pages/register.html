@@ -273,6 +273,22 @@
               </p>
             </div>
 
+            <!-- Development notice -->
+            <div
+              style="
+                background-color: #fff3cd;
+                color: #856404;
+                padding: 10px;
+                border-radius: 5px;
+                margin-bottom: 20px;
+                text-align: center;
+              "
+            >
+              <i class="fas fa-info-circle"></i>
+              <strong>Development Mode:</strong> Backend functionality is under
+              development. This form is for demonstration purposes only.
+            </div>
+
             <div id="success-message" class="success-message">
               Registration successful! Please check your email to verify your
               account.
@@ -622,11 +638,14 @@
               password: passwordInput.value,
             };
 
+            // Define API URL for local development only
+            const API_URL = "http://localhost:5000/api";
+
             // For demonstration, log the data that would be sent
             console.log("User registration data:", userData);
 
-            // Mock API call to our backend API
-            fetch("http://localhost:5000/api/auth/register", {
+            // API call to our backend API
+            fetch(`${API_URL}/auth/register`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

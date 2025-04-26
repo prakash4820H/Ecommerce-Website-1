@@ -1,4 +1,10 @@
 // Auth related functions
+// Check if we're on the production domain
+const isProduction =
+  window.location.hostname !== "localhost" &&
+  window.location.hostname !== "127.0.0.1";
+
+// Use the appropriate API URL based on environment
 const API_URL = "http://localhost:5000/api"; // Your local development server
 
 // Toast notification function
