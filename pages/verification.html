@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Verify your email address for your JPBABA account"
+    />
+    <title>Email Verification - JPBABA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+
+    <style>
+      .verification-container {
+        max-width: 600px;
+        margin: 5rem auto;
+        padding: 3rem;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        text-align: center;
+      }
+
+      .verification-icon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+        color: #4a90e2;
+      }
+
+      .verification-title {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .verification-message {
+        margin-bottom: 2rem;
+        color: #666;
+        line-height: 1.6;
+      }
+
+      .email-highlight {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .verification-actions {
+        margin-top: 2rem;
+      }
+
+      .btn-verification {
+        padding: 0.75rem 1.5rem;
+        font-weight: 600;
+        margin: 0 0.5rem 1rem 0.5rem;
+      }
+
+      .verification-note {
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+      }
+
+      .verification-loading {
+        display: none;
+        margin: 2rem 0;
+      }
+
+      .verification-loading .spinner {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(74, 144, 226, 0.2);
+        border-radius: 50%;
+        border-top-color: #4a90e2;
+        animation: spin 1s ease-in-out infinite;
+      }
+
+      .verification-success,
+      .verification-error {
+        display: none;
+        padding: 1rem;
+        border-radius: 5px;
+        margin: 1.5rem 0;
+      }
+
+      .verification-success {
+        background-color: rgba(40, 167, 69, 0.1);
+        border: 1px solid rgba(40, 167, 69, 0.2);
+        color: #28a745;
+      }
+
+      .verification-error {
+        background-color: rgba(220, 53, 69, 0.1);
+        border: 1px solid rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .verification-container {
+          margin: 3rem 1rem;
+          padding: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-logo">
+            <a href="../index.html">JPBABA</a>
+          </div>
+
+          <button
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="categories.html" class="nav-link">Categories</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <a href="#" class="nav-icon" aria-label="Search">
+              <i class="fas fa-search"></i>
+            </a>
+            <a href="account.html" class="nav-icon" aria-label="My Account">
+              <i class="fas fa-user"></i>
+            </a>
+            <a href="cart.html" class="nav-icon" aria-label="Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count" class="cart-count hidden">0</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="verification-container">
+          <div id="verification-initial">
+            <i class="fas fa-envelope verification-icon"></i>
+            <h1 class="verification-title">Verify Your Email Address</h1>
+            <p class="verification-message">
+              We've sent a verification email to
+              <span id="user-email" class="email-highlight"
+                >your email address</span
+              >.<br />
+              Please check your inbox and click the verification link to
+              complete your registration.
+            </p>
+
+            <div class="verification-actions">
+              <button
+                id="btn-check-status"
+                class="btn btn-primary btn-verification"
+              >
+                I've Verified My Email
+              </button>
+              <button
+                id="btn-resend"
+                class="btn btn-outline-primary btn-verification"
+              >
+                Resend Verification Email
+              </button>
+            </div>
+
+            <p class="verification-note">
+              If you don't see the email, please check your spam folder or
+              <a href="contact.html">contact our support team</a>.
+            </p>
+          </div>
+
+          <div id="verification-loading" class="verification-loading">
+            <div class="spinner"></div>
+            <p>Checking verification status...</p>
+          </div>
+
+          <div id="verification-success" class="verification-success">
+            <i class="fas fa-check-circle"></i>
+            <p>Your email has been successfully verified!</p>
+            <div class="verification-actions">
+              <a href="login.html" class="btn btn-primary btn-verification">
+                Continue to Login
+              </a>
+            </div>
+          </div>
+
+          <div id="verification-error" class="verification-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <p id="error-message">
+              We couldn't verify your email. Please try the verification link
+              again or request a new one.
+            </p>
+          </div>
+
+          <div id="verification-token" style="display: none">
+            <i class="fas fa-key verification-icon"></i>
+            <h1 class="verification-title">Verifying Your Email</h1>
+            <div
+              id="token-loading"
+              class="verification-loading"
+              style="display: block"
+            >
+              <div class="spinner"></div>
+              <p>Verifying your email address...</p>
+            </div>
+            <div id="token-success" class="verification-success">
+              <i class="fas fa-check-circle"></i>
+              <p>Your email has been successfully verified!</p>
+              <div class="verification-actions">
+                <a href="login.html" class="btn btn-primary btn-verification">
+                  Continue to Login
+                </a>
+              </div>
+            </div>
+            <div id="token-error" class="verification-error">
+              <i class="fas fa-exclamation-circle"></i>
+              <p id="token-error-message">
+                Invalid or expired verification link. Please request a new one.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-title">JPBABA</h3>
+            <p>
+              Discover the perfect blend of quality, style, and affordability
+              with our extensive collection of products.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Pinterest"
+                ><i class="fab fa-pinterest-p"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Shop</h3>
+            <ul class="footer-links">
+              <li><a href="shop.html?category=electronics">Electronics</a></li>
+              <li><a href="shop.html?category=clothing">Clothing</a></li>
+              <li><a href="shop.html?category=footwear">Footwear</a></li>
+              <li><a href="shop.html?category=accessories">Accessories</a></li>
+              <li><a href="shop.html?discount=true">Sale</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="shipping.html">Shipping & Returns</a></li>
+              <li><a href="terms.html">Terms & Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">My Account</h3>
+            <ul class="footer-links">
+              <li><a href="account.html">My Account</a></li>
+              <li><a href="orders.html">Order History</a></li>
+              <li><a href="wishlist.html">Wishlist</a></li>
+              <li><a href="newsletter.html">Newsletter</a></li>
+              <li><a href="returns.html">Returns</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2023 JPBABA. All rights reserved.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container"></div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/auth.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get email from URL query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get("email");
+        const token = urlParams.get("token");
+
+        // Set email in the page
+        if (email) {
+          document.getElementById("user-email").textContent = email;
+        }
+
+        // If there's a token in the URL, we're verifying directly
+        if (token) {
+          document.getElementById("verification-initial").style.display =
+            "none";
+          document.getElementById("verification-token").style.display = "block";
+
+          // Hide other elements initially
+          document.getElementById("token-success").style.display = "none";
+          document.getElementById("token-error").style.display = "none";
+
+          // Verify the token
+          verifyEmailToken(token);
+        }
+
+        // Button event listeners
+        document
+          .getElementById("btn-check-status")
+          .addEventListener("click", function () {
+            if (!email) {
+              showToast(
+                "Email address is missing. Please try the link in your email.",
+                "error"
+              );
+              return;
+            }
+
+            checkVerificationStatus(email);
+          });
+
+        document
+          .getElementById("btn-resend")
+          .addEventListener("click", function () {
+            if (!email) {
+              showToast(
+                "Email address is missing. Please contact support.",
+                "error"
+              );
+              return;
+            }
+
+            resendVerificationEmail(email);
+          });
+
+        // Function to check verification status
+        async function checkVerificationStatus(email) {
+          // Show loading
+          document.getElementById("verification-initial").style.display =
+            "none";
+          document.getElementById("verification-loading").style.display =
+            "block";
+          document.getElementById("verification-success").style.display =
+            "none";
+          document.getElementById("verification-error").style.display = "none";
+
+          try {
+            const API_URL = "http://localhost:5000/api";
+            const response = await fetch(
+              `${API_URL}/auth/verify-status?email=${encodeURIComponent(email)}`
+            );
+            const data = await response.json();
+
+            // Hide loading
+            document.getElementById("verification-loading").style.display =
+              "none";
+
+            if (data.verified) {
+              // Show success
+              document.getElementById("verification-success").style.display =
+                "block";
+            } else {
+              // Show error with message
+              document.getElementById("error-message").textContent =
+                "Your email is not verified yet. Please check your inbox for the verification link.";
+              document.getElementById("verification-error").style.display =
+                "block";
+              document.getElementById("verification-initial").style.display =
+                "block";
+            }
+          } catch (error) {
+            console.error("Verification status check error:", error);
+
+            // Hide loading, show error
+            document.getElementById("verification-loading").style.display =
+              "none";
+            document.getElementById("error-message").textContent =
+              "Could not check verification status. Please try again later.";
+            document.getElementById("verification-error").style.display =
+              "block";
+            document.getElementById("verification-initial").style.display =
+              "block";
+          }
+        }
+
+        // Function to resend verification email
+        async function resendVerificationEmail(email) {
+          const resendBtn = document.getElementById("btn-resend");
+          const originalText = resendBtn.textContent;
+
+          // Disable button and show loading state
+          resendBtn.disabled = true;
+          resendBtn.textContent = "Sending...";
+
+          try {
+            const API_URL = "http://localhost:5000/api";
+            const response = await fetch(
+              `${API_URL}/auth/resend-verification`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email }),
+              }
+            );
+
+            const data = await response.json();
+
+            if (data.success) {
+              showToast(
+                "Verification email has been resent. Please check your inbox.",
+                "success"
+              );
+            } else {
+              showToast(
+                data.message || "Failed to resend verification email.",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error("Resend verification error:", error);
+            showToast("An error occurred. Please try again later.", "error");
+          } finally {
+            // Reset button
+            resendBtn.disabled = false;
+            resendBtn.textContent = originalText;
+          }
+        }
+
+        // Function to verify token from URL
+        async function verifyEmailToken(token) {
+          try {
+            const API_URL = "http://localhost:5000/api";
+            const response = await fetch(`${API_URL}/auth/verify-email`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ token }),
+            });
+
+            const data = await response.json();
+
+            // Hide loading
+            document.getElementById("token-loading").style.display = "none";
+
+            if (data.success) {
+              // Show success
+              document.getElementById("token-success").style.display = "block";
+            } else {
+              // Show error
+              document.getElementById("token-error-message").textContent =
+                data.message || "Invalid or expired verification token.";
+              document.getElementById("token-error").style.display = "block";
+            }
+          } catch (error) {
+            console.error("Token verification error:", error);
+
+            // Hide loading, show error
+            document.getElementById("token-loading").style.display = "none";
+            document.getElementById("token-error-message").textContent =
+              "An error occurred during verification. Please try again later.";
+            document.getElementById("token-error").style.display = "block";
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

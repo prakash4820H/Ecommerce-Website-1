@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create your account at JPBABA - Start shopping today!"
+    />
+    <title>Register | JPBABA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+
+    <style>
+      /* Registration Page Styles */
+      .register-container {
+        max-width: 600px;
+        margin: 3rem auto 5rem;
+        padding: 2rem;
+        background-color: var(--light-text);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--box-shadow-md);
+      }
+
+      .register-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .register-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+      }
+
+      .register-header p {
+        color: var(--gray-500);
+      }
+
+      .register-form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-color);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--gray-300);
+        border-radius: var(--border-radius-sm);
+        font-family: inherit;
+        font-size: 1rem;
+        transition: border-color var(--transition-speed);
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-color);
+        outline: none;
+      }
+
+      .form-note {
+        font-size: 0.875rem;
+        color: var(--gray-500);
+        margin-top: 0.5rem;
+      }
+
+      .password-container {
+        position: relative;
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--gray-500);
+        cursor: pointer;
+      }
+
+      .register-btn {
+        background-color: var(--primary-color);
+        color: var(--light-text);
+        border: none;
+        border-radius: var(--border-radius-sm);
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color var(--transition-speed);
+        margin-top: 1rem;
+      }
+
+      .register-btn:hover {
+        background-color: #2563eb;
+      }
+
+      .login-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: var(--gray-600);
+      }
+
+      .login-link a {
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+
+      .login-link a:hover {
+        text-decoration: underline;
+      }
+
+      .error-message {
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: none;
+      }
+
+      .error-message.visible {
+        display: block;
+      }
+
+      .form-control.error {
+        border-color: #dc3545;
+      }
+
+      .success-message {
+        padding: 1rem;
+        background-color: #d4edda;
+        color: #155724;
+        border-radius: var(--border-radius-sm);
+        margin-bottom: 1.5rem;
+        text-align: center;
+        display: none;
+      }
+
+      .success-message.visible {
+        display: block;
+      }
+
+      .password-requirements {
+        font-size: 0.85rem;
+        color: var(--gray-500);
+        margin-top: 0.5rem;
+      }
+
+      .requirement {
+        display: flex;
+        align-items: center;
+        margin: 0.25rem 0;
+      }
+
+      .requirement i {
+        margin-right: 0.5rem;
+        font-size: 0.75rem;
+      }
+
+      .requirement.met i {
+        color: var(--success-color);
+      }
+
+      .requirement.unmet i {
+        color: var(--gray-400);
+      }
+
+      /* Responsive adjustments */
+      @media screen and (max-width: 768px) {
+        .register-container {
+          padding: 1.5rem;
+          margin: 2rem 1rem 4rem;
+        }
+
+        .register-header h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-logo">
+            <a href="../index.html">JPBABA</a>
+          </div>
+
+          <button
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="categories.html" class="nav-link">Categories</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <a href="#" class="nav-icon" aria-label="Search">
+              <i class="fas fa-search"></i>
+            </a>
+            <a href="account.html" class="nav-icon" aria-label="My Account">
+              <i class="fas fa-user"></i>
+            </a>
+            <a href="cart.html" class="nav-icon" aria-label="Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count" class="cart-count hidden">0</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1>Create Account</h1>
+          <div class="breadcrumbs">
+            <a href="../index.html">Home</a> /
+            <span>Register</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Registration Section -->
+      <section class="register-section">
+        <div class="container">
+          <div class="register-container">
+            <div class="register-header">
+              <h1>Join JPBABA</h1>
+              <p>
+                Create your account to enjoy a personalized shopping experience
+              </p>
+            </div>
+
+            <div id="success-message" class="success-message">
+              Registration successful! Please check your email to verify your
+              account.
+            </div>
+
+            <form id="register-form" class="register-form">
+              <div class="form-group">
+                <label for="name" class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  class="form-control"
+                  placeholder="Enter your full name"
+                  required
+                />
+                <div id="name-error" class="error-message">
+                  Please enter your full name
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Enter your email address"
+                  required
+                />
+                <div id="email-error" class="error-message">
+                  Please enter a valid email address
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <div class="password-container">
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Create a password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    id="password-toggle"
+                    class="password-toggle"
+                    aria-label="Toggle password visibility"
+                  >
+                    <i class="far fa-eye"></i>
+                  </button>
+                </div>
+                <div id="password-error" class="error-message">
+                  Password must be at least 6 characters
+                </div>
+                <div class="password-requirements">
+                  <div class="requirement" id="req-length">
+                    <i class="fas fa-circle"></i>
+                    <span>At least 6 characters</span>
+                  </div>
+                  <div class="requirement" id="req-letter">
+                    <i class="fas fa-circle"></i>
+                    <span>At least one letter</span>
+                  </div>
+                  <div class="requirement" id="req-number">
+                    <i class="fas fa-circle"></i>
+                    <span>At least one number</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="confirm-password" class="form-label"
+                  >Confirm Password</label
+                >
+                <div class="password-container">
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    class="form-control"
+                    placeholder="Confirm your password"
+                    required
+                  />
+                  <button
+                    type="button"
+                    id="confirm-password-toggle"
+                    class="password-toggle"
+                    aria-label="Toggle password visibility"
+                  >
+                    <i class="far fa-eye"></i>
+                  </button>
+                </div>
+                <div id="confirm-password-error" class="error-message">
+                  Passwords do not match
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="terms"
+                    name="terms"
+                    required
+                  />
+                  <label class="form-check-label" for="terms">
+                    I agree to the
+                    <a href="terms.html">Terms and Conditions</a> and
+                    <a href="privacy.html">Privacy Policy</a>
+                  </label>
+                </div>
+                <div id="terms-error" class="error-message">
+                  You must agree to the terms and conditions
+                </div>
+              </div>
+
+              <button type="submit" class="register-btn">Create Account</button>
+
+              <div class="login-link">
+                Already have an account? <a href="login.html">Log in</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-title">JPBABA</h3>
+            <p>
+              Discover the perfect blend of quality, style, and affordability
+              with our extensive collection of products.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Pinterest"
+                ><i class="fab fa-pinterest-p"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Shop</h3>
+            <ul class="footer-links">
+              <li><a href="shop.html?category=electronics">Electronics</a></li>
+              <li><a href="shop.html?category=clothing">Clothing</a></li>
+              <li><a href="shop.html?category=footwear">Footwear</a></li>
+              <li><a href="shop.html?category=accessories">Accessories</a></li>
+              <li><a href="shop.html?discount=true">Sale</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="shipping.html">Shipping & Returns</a></li>
+              <li><a href="terms.html">Terms & Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">My Account</h3>
+            <ul class="footer-links">
+              <li><a href="account.html">My Account</a></li>
+              <li><a href="orders.html">Order History</a></li>
+              <li><a href="wishlist.html">Wishlist</a></li>
+              <li><a href="newsletter.html">Newsletter</a></li>
+              <li><a href="returns.html">Returns</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2023 JPBABA. All rights reserved.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container"></div>
+
+    <!-- Custom JavaScript -->
+    <script src="../assets/js/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const registerForm = document.getElementById("register-form");
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput =
+          document.getElementById("confirm-password");
+        const termsCheckbox = document.getElementById("terms");
+        const passwordToggle = document.getElementById("password-toggle");
+        const confirmPasswordToggle = document.getElementById(
+          "confirm-password-toggle"
+        );
+        const successMessage = document.getElementById("success-message");
+
+        // Password requirements elements
+        const reqLength = document.getElementById("req-length");
+        const reqLetter = document.getElementById("req-letter");
+        const reqNumber = document.getElementById("req-number");
+
+        // Password validation
+        passwordInput.addEventListener("input", function () {
+          const password = passwordInput.value;
+
+          // Check password length
+          if (password.length >= 6) {
+            reqLength.classList.add("met");
+            reqLength.classList.remove("unmet");
+            reqLength.querySelector("i").className = "fas fa-check-circle";
+          } else {
+            reqLength.classList.add("unmet");
+            reqLength.classList.remove("met");
+            reqLength.querySelector("i").className = "fas fa-circle";
+          }
+
+          // Check for at least one letter
+          if (/[a-zA-Z]/.test(password)) {
+            reqLetter.classList.add("met");
+            reqLetter.classList.remove("unmet");
+            reqLetter.querySelector("i").className = "fas fa-check-circle";
+          } else {
+            reqLetter.classList.add("unmet");
+            reqLetter.classList.remove("met");
+            reqLetter.querySelector("i").className = "fas fa-circle";
+          }
+
+          // Check for at least one number
+          if (/\d/.test(password)) {
+            reqNumber.classList.add("met");
+            reqNumber.classList.remove("unmet");
+            reqNumber.querySelector("i").className = "fas fa-check-circle";
+          } else {
+            reqNumber.classList.add("unmet");
+            reqNumber.classList.remove("met");
+            reqNumber.querySelector("i").className = "fas fa-circle";
+          }
+        });
+
+        // Toggle password visibility
+        passwordToggle.addEventListener("click", function () {
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            passwordToggle.innerHTML = '<i class="far fa-eye-slash"></i>';
+          } else {
+            passwordInput.type = "password";
+            passwordToggle.innerHTML = '<i class="far fa-eye"></i>';
+          }
+        });
+
+        confirmPasswordToggle.addEventListener("click", function () {
+          if (confirmPasswordInput.type === "password") {
+            confirmPasswordInput.type = "text";
+            confirmPasswordToggle.innerHTML =
+              '<i class="far fa-eye-slash"></i>';
+          } else {
+            confirmPasswordInput.type = "password";
+            confirmPasswordToggle.innerHTML = '<i class="far fa-eye"></i>';
+          }
+        });
+
+        // Form validation
+        registerForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          let isValid = true;
+
+          // Reset error messages
+          document.querySelectorAll(".error-message").forEach(function (el) {
+            el.classList.remove("visible");
+          });
+          document.querySelectorAll(".form-control").forEach(function (el) {
+            el.classList.remove("error");
+          });
+
+          // Validate name
+          if (nameInput.value.trim() === "") {
+            document.getElementById("name-error").classList.add("visible");
+            nameInput.classList.add("error");
+            isValid = false;
+          }
+
+          // Validate email
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(emailInput.value)) {
+            document.getElementById("email-error").classList.add("visible");
+            emailInput.classList.add("error");
+            isValid = false;
+          }
+
+          // Validate password
+          if (passwordInput.value.length < 6) {
+            document.getElementById("password-error").classList.add("visible");
+            passwordInput.classList.add("error");
+            isValid = false;
+          }
+
+          // Validate confirm password
+          if (passwordInput.value !== confirmPasswordInput.value) {
+            document
+              .getElementById("confirm-password-error")
+              .classList.add("visible");
+            confirmPasswordInput.classList.add("error");
+            isValid = false;
+          }
+
+          // Validate terms
+          if (!termsCheckbox.checked) {
+            document.getElementById("terms-error").classList.add("visible");
+            isValid = false;
+          }
+
+          // If form is valid, submit it
+          if (isValid) {
+            // Here we would normally make an API call to the backend
+            const userData = {
+              name: nameInput.value,
+              email: emailInput.value,
+              password: passwordInput.value,
+            };
+
+            // For demonstration, log the data that would be sent
+            console.log("User registration data:", userData);
+
+            // Mock API call to our backend API
+            fetch("http://localhost:5000/api/auth/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.success) {
+                  // Show success message
+                  successMessage.classList.add("visible");
+                  registerForm.reset();
+
+                  // Redirect to verification page after 3 seconds
+                  setTimeout(() => {
+                    window.location.href =
+                      "verification.html?email=" + emailInput.value;
+                  }, 3000);
+                } else {
+                  // Show error message
+                  showToast(
+                    data.error || "Registration failed. Please try again.",
+                    "error"
+                  );
+                }
+              })
+              .catch((error) => {
+                console.error("Registration error:", error);
+                showToast(
+                  "Registration failed. Please try again later.",
+                  "error"
+                );
+              });
+          }
+        });
+
+        // Function to show toast messages
+        function showToast(message, type = "info") {
+          const toastContainer = document.querySelector(".toast-container");
+          const toast = document.createElement("div");
+          toast.classList.add("toast", `toast-${type}`);
+
+          const icon =
+            type === "success"
+              ? "check-circle"
+              : type === "error"
+              ? "exclamation-circle"
+              : "info-circle";
+
+          toast.innerHTML = `
+            <div class="toast-icon">
+              <i class="fas fa-${icon}"></i>
+            </div>
+            <div class="toast-content">
+              <p class="toast-message">${message}</p>
+            </div>
+            <button class="toast-close" aria-label="Close notification">
+              <i class="fas fa-times"></i>
+            </button>
+          `;
+
+          toastContainer.appendChild(toast);
+
+          // Show toast
+          setTimeout(() => {
+            toast.classList.add("show");
+          }, 100);
+
+          // Auto remove toast after 5 seconds
+          setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => {
+              toast.remove();
+            }, 300);
+          }, 5000);
+
+          // Close toast on click
+          const closeBtn = toast.querySelector(".toast-close");
+          closeBtn.addEventListener("click", function () {
+            toast.classList.remove("show");
+            setTimeout(() => {
+              toast.remove();
+            }, 300);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Login to your JPBABA account - Access your order history and manage your profile."
+    />
+    <title>Login - JPBABA</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+
+    <style>
+      .auth-container {
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .auth-image {
+        flex: 1;
+        background-image: url("../assets/images/auth-bg.jpg");
+        background-size: cover;
+        background-position: center;
+        display: none;
+      }
+
+      .auth-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        max-width: 550px;
+        margin: 0 auto;
+      }
+
+      .auth-logo {
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .auth-logo img {
+        height: 50px;
+      }
+
+      .auth-form {
+        background: #fff;
+        border-radius: 10px;
+        padding: 2.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .auth-title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: #333;
+      }
+
+      .auth-subtitle {
+        color: #666;
+        margin-bottom: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #555;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: "Poppins", sans-serif;
+        transition: border-color 0.3s;
+      }
+
+      .form-control:focus {
+        border-color: #4a90e2;
+        outline: none;
+      }
+
+      .auth-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+      }
+
+      .remember-me input {
+        margin-right: 0.5rem;
+      }
+
+      .forgot-password {
+        color: #4a90e2;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .forgot-password:hover {
+        color: #2c6cb9;
+        text-decoration: underline;
+      }
+
+      .btn-auth {
+        width: 100%;
+        padding: 0.75rem;
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .auth-divider {
+        display: flex;
+        align-items: center;
+        margin: 1.5rem 0;
+        color: #999;
+      }
+
+      .auth-divider::before,
+      .auth-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #ddd;
+      }
+
+      .auth-divider span {
+        padding: 0 1rem;
+      }
+
+      .auth-footer {
+        text-align: center;
+        margin-top: 2rem;
+        color: #666;
+      }
+
+      .auth-footer a {
+        color: #4a90e2;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .auth-footer a:hover {
+        text-decoration: underline;
+      }
+
+      .social-login {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .btn-social {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        background: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+
+      .btn-social:hover {
+        background-color: #f9f9f9;
+        border-color: #ccc;
+      }
+
+      .btn-social i {
+        margin-right: 0.5rem;
+      }
+
+      .btn-google i {
+        color: #db4437;
+      }
+
+      .btn-facebook i {
+        color: #4267b2;
+      }
+
+      @media (min-width: 768px) {
+        .auth-image {
+          display: block;
+        }
+
+        .auth-content {
+          padding: 3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-image"></div>
+      <div class="auth-content">
+        <div class="auth-logo">
+          <a href="../index.html">
+            <img src="../assets/images/logo.png" alt="JPBABA Logo" />
+          </a>
+        </div>
+
+        <div class="auth-form">
+          <h1 class="auth-title">Welcome back</h1>
+          <p class="auth-subtitle">
+            Sign in to your account to continue shopping
+          </p>
+
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="email" class="form-label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="Enter your password"
+                required
+              />
+            </div>
+
+            <div class="auth-actions">
+              <div class="remember-me">
+                <input type="checkbox" id="rememberMe" />
+                <label for="rememberMe">Remember me</label>
+              </div>
+              <a href="forgot-password.html" class="forgot-password"
+                >Forgot Password?</a
+              >
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-auth">
+              Sign In
+            </button>
+
+            <div class="auth-divider">
+              <span>or continue with</span>
+            </div>
+
+            <div class="social-login">
+              <button type="button" class="btn-social btn-google">
+                <i class="fab fa-google"></i> Google
+              </button>
+              <button type="button" class="btn-social btn-facebook">
+                <i class="fab fa-facebook-f"></i> Facebook
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="register.html">Sign Up</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/js/auth.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fill email if saved in localStorage (remember me)
+        const savedCredentials = getSavedCredentials();
+        if (savedCredentials.email) {
+          document.getElementById("email").value = savedCredentials.email;
+          document.getElementById("rememberMe").checked = true;
+        }
+
+        // Handle login form submission
+        const loginForm = document.getElementById("loginForm");
+
+        loginForm.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const rememberMe = document.getElementById("rememberMe").checked;
+
+          // Basic validation
+          if (!email || !password) {
+            showToast("Please enter both email and password", "error");
+            return;
+          }
+
+          // Display loading state
+          const submitBtn = loginForm.querySelector("button[type='submit']");
+          const originalBtnText = submitBtn.textContent;
+          submitBtn.textContent = "Signing in...";
+          submitBtn.disabled = true;
+
+          // Attempt login
+          const result = await login(email, password, rememberMe);
+
+          // Reset button state
+          submitBtn.textContent = originalBtnText;
+          submitBtn.disabled = false;
+
+          if (result.success) {
+            showToast("Login successful! Redirecting...", "success");
+
+            // Redirect to homepage or previous page after successful login
+            setTimeout(() => {
+              const redirectUrl =
+                new URLSearchParams(window.location.search).get("redirect") ||
+                "../index.html";
+              window.location.href = redirectUrl;
+            }, 1500);
+          } else {
+            showToast(
+              result.error || "Login failed. Please check your credentials.",
+              "error"
+            );
+          }
+        });
+
+        // Social login buttons (placeholders for now)
+        document
+          .querySelector(".btn-google")
+          .addEventListener("click", function () {
+            showToast("Google login is not implemented yet", "info");
+          });
+
+        document
+          .querySelector(".btn-facebook")
+          .addEventListener("click", function () {
+            showToast("Facebook login is not implemented yet", "info");
+          });
+      });
+    </script>
+  </body>
+</html>
