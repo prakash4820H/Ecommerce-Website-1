@@ -1,3 +1,13 @@
+/* 
+ * Main stylesheet for JPBABA E-commerce Website
+ * 
+ * OPTIMIZATION NOTE:
+ * To reduce redundancy and improve maintenance:
+ * 1. Consider consolidating main.css and components.css into a single file
+ * 2. CSS could be organized in sections: variables, reset, layout, components, utilities
+ * 3. Remove duplicate media queries and organize them at the end of the file
+ */
+
 /* Reset & Base Styles */
 :root {
   /* Color Variables */

@@ -234,12 +234,6 @@
           </ul>
 
           <div class="nav-actions">
-            <a href="#" class="nav-icon" aria-label="Search">
-              <i class="fas fa-search"></i>
-            </a>
-            <a href="account.html" class="nav-icon" aria-label="My Account">
-              <i class="fas fa-user"></i>
-            </a>
             <a href="cart.html" class="nav-icon" aria-label="Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
               <span id="cart-count" class="cart-count hidden">0</span>
@@ -631,54 +625,21 @@
 
           // If form is valid, submit it
           if (isValid) {
-            // Here we would normally make an API call to the backend
-            const userData = {
-              name: nameInput.value,
-              email: emailInput.value,
-              password: passwordInput.value,
-            };
+            // Show success message
+            successMessage.classList.add("visible");
+            registerForm.reset();
 
-            // Define API URL for local development only
-            const API_URL = "http://localhost:5000/api";
+            // For demonstration only - no backend API call
+            showToast(
+              "Registration successful! Please check your email.",
+              "success"
+            );
 
-            // For demonstration, log the data that would be sent
-            console.log("User registration data:", userData);
-
-            // API call to our backend API
-            fetch(`${API_URL}/auth/register`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                if (data.success) {
-                  // Show success message
-                  successMessage.classList.add("visible");
-                  registerForm.reset();
-
-                  // Redirect to verification page after 3 seconds
-                  setTimeout(() => {
-                    window.location.href =
-                      "verification.html?email=" + emailInput.value;
-                  }, 3000);
-                } else {
-                  // Show error message
-                  showToast(
-                    data.error || "Registration failed. Please try again.",
-                    "error"
-                  );
-                }
-              })
-              .catch((error) => {
-                console.error("Registration error:", error);
-                showToast(
-                  "Registration failed. Please try again later.",
-                  "error"
-                );
-              });
+            // Simulate redirect after 3 seconds
+            setTimeout(() => {
+              window.location.href =
+                "verification.html?email=" + emailInput.value;
+            }, 3000);
           }
         });
 

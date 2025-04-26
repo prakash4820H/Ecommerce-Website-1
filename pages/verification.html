@@ -153,12 +153,6 @@
           </ul>
 
           <div class="nav-actions">
-            <a href="#" class="nav-icon" aria-label="Search">
-              <i class="fas fa-search"></i>
-            </a>
-            <a href="account.html" class="nav-icon" aria-label="My Account">
-              <i class="fas fa-user"></i>
-            </a>
             <a href="cart.html" class="nav-icon" aria-label="Shopping Cart">
               <i class="fas fa-shopping-cart"></i>
               <span id="cart-count" class="cart-count hidden">0</span>
@@ -350,12 +344,8 @@
     <div class="toast-container"></div>
 
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/auth.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Define API URL for local development only
-        const API_URL = "http://localhost:5000/api";
-
         // Get email from URL query parameter
         const urlParams = new URLSearchParams(window.location.search);
         const email = urlParams.get("email");
@@ -372,12 +362,13 @@
             "none";
           document.getElementById("verification-token").style.display = "block";
 
-          // Hide other elements initially
-          document.getElementById("token-success").style.display = "none";
-          document.getElementById("token-error").style.display = "none";
-
-          // Verify the token
-          verifyEmailToken(token);
+          // Simulate token verification (no backend)
+          setTimeout(() => {
+            // Hide loading
+            document.getElementById("token-loading").style.display = "none";
+            // Show success
+            document.getElementById("token-success").style.display = "block";
+          }, 1500);
         }
 
         // Button event listeners
@@ -392,7 +383,26 @@
               return;
             }
 
-            checkVerificationStatus(email);
+            // Simulate checking status (no backend)
+            // Show loading
+            document.getElementById("verification-initial").style.display =
+              "none";
+            document.getElementById("verification-loading").style.display =
+              "block";
+            document.getElementById("verification-success").style.display =
+              "none";
+            document.getElementById("verification-error").style.display =
+              "none";
+
+            // Simulate API call
+            setTimeout(() => {
+              // Hide loading
+              document.getElementById("verification-loading").style.display =
+                "none";
+              // Show success (for demo purposes, always show success)
+              document.getElementById("verification-success").style.display =
+                "block";
+            }, 1500);
           });
 
         document
@@ -406,136 +416,63 @@
               return;
             }
 
-            resendVerificationEmail(email);
-          });
+            // Simulate resending email (no backend)
+            const resendBtn = document.getElementById("btn-resend");
+            const originalText = resendBtn.textContent;
 
-        // Function to check verification status
-        async function checkVerificationStatus(email) {
-          // Show loading
-          document.getElementById("verification-initial").style.display =
-            "none";
-          document.getElementById("verification-loading").style.display =
-            "block";
-          document.getElementById("verification-success").style.display =
-            "none";
-          document.getElementById("verification-error").style.display = "none";
+            // Disable button and show loading state
+            resendBtn.disabled = true;
+            resendBtn.textContent = "Sending...";
 
-          try {
-            const response = await fetch(
-              `${API_URL}/auth/verify-status?email=${encodeURIComponent(email)}`
-            );
-            const data = await response.json();
+            // Simulate API call
+            setTimeout(() => {
+              // Reset button
+              resendBtn.disabled = false;
+              resendBtn.textContent = originalText;
 
-            // Hide loading
-            document.getElementById("verification-loading").style.display =
-              "none";
-
-            if (data.verified) {
-              // Show success
-              document.getElementById("verification-success").style.display =
-                "block";
-            } else {
-              // Show error with message
-              document.getElementById("error-message").textContent =
-                "Your email is not verified yet. Please check your inbox for the verification link.";
-              document.getElementById("verification-error").style.display =
-                "block";
-              document.getElementById("verification-initial").style.display =
-                "block";
-            }
-          } catch (error) {
-            console.error("Verification status check error:", error);
-
-            // Hide loading, show error
-            document.getElementById("verification-loading").style.display =
-              "none";
-            document.getElementById("error-message").textContent =
-              "Could not check verification status. Please try again later.";
-            document.getElementById("verification-error").style.display =
-              "block";
-            document.getElementById("verification-initial").style.display =
-              "block";
-          }
-        }
-
-        // Function to resend verification email
-        async function resendVerificationEmail(email) {
-          const resendBtn = document.getElementById("btn-resend");
-          const originalText = resendBtn.textContent;
-
-          // Disable button and show loading state
-          resendBtn.disabled = true;
-          resendBtn.textContent = "Sending...";
-
-          try {
-            const response = await fetch(
-              `${API_URL}/auth/resend-verification`,
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email }),
-              }
-            );
-
-            const data = await response.json();
-
-            if (data.success) {
+              // Show success message
               showToast(
                 "Verification email has been resent. Please check your inbox.",
                 "success"
               );
-            } else {
-              showToast(
-                data.message || "Failed to resend verification email.",
-                "error"
-              );
-            }
-          } catch (error) {
-            console.error("Resend verification error:", error);
-            showToast("An error occurred. Please try again later.", "error");
-          } finally {
-            // Reset button
-            resendBtn.disabled = false;
-            resendBtn.textContent = originalText;
+            }, 1500);
+          });
+
+        // Function to show toast messages
+        function showToast(message, type = "info") {
+          // Create toast container if it doesn't exist
+          let toastContainer = document.querySelector(".toast-container");
+          if (!toastContainer) {
+            toastContainer = document.createElement("div");
+            toastContainer.className = "toast-container";
+            document.body.appendChild(toastContainer);
           }
-        }
 
-        // Function to verify token from URL
-        async function verifyEmailToken(token) {
-          try {
-            const response = await fetch(`${API_URL}/auth/verify-email`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ token }),
-            });
+          // Create toast
+          const toast = document.createElement("div");
+          toast.className = `toast toast-${type}`;
+          toast.innerHTML = `
+            <div class="toast-content">
+              <p class="toast-message">${message}</p>
+            </div>
+            <button class="toast-close">×</button>
+          `;
 
-            const data = await response.json();
+          // Add to container
+          toastContainer.appendChild(toast);
 
-            // Hide loading
-            document.getElementById("token-loading").style.display = "none";
+          // Show toast
+          setTimeout(() => {
+            toast.classList.add("show");
+          }, 100);
 
-            if (data.success) {
-              // Show success
-              document.getElementById("token-success").style.display = "block";
-            } else {
-              // Show error
-              document.getElementById("token-error-message").textContent =
-                data.message || "Invalid or expired verification token.";
-              document.getElementById("token-error").style.display = "block";
-            }
-          } catch (error) {
-            console.error("Token verification error:", error);
-
-            // Hide loading, show error
-            document.getElementById("token-loading").style.display = "none";
-            document.getElementById("token-error-message").textContent =
-              "An error occurred during verification. Please try again later.";
-            document.getElementById("token-error").style.display = "block";
-          }
+          // Auto remove after 3 seconds
+          setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => {
+              toast.remove();
+            }, 300);
+          }, 3000);
         }
       });
     </script>

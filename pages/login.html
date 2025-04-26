@@ -314,20 +314,33 @@
       </div>
     </div>
 
-    <script src="../assets/js/auth.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        // Fill email if saved in localStorage (remember me)
-        const savedCredentials = getSavedCredentials();
-        if (savedCredentials.email) {
-          document.getElementById("email").value = savedCredentials.email;
+        // Simple storage functions to replace auth.js
+        function saveToLocalStorage(email) {
+          if (window.localStorage) {
+            localStorage.setItem("userEmail", email);
+          }
+        }
+
+        function getFromLocalStorage() {
+          if (window.localStorage) {
+            return localStorage.getItem("userEmail") || "";
+          }
+          return "";
+        }
+
+        // Fill email if saved in localStorage
+        const savedEmail = getFromLocalStorage();
+        if (savedEmail) {
+          document.getElementById("email").value = savedEmail;
           document.getElementById("rememberMe").checked = true;
         }
 
         // Handle login form submission
         const loginForm = document.getElementById("loginForm");
 
-        loginForm.addEventListener("submit", async function (event) {
+        loginForm.addEventListener("submit", function (event) {
           event.preventDefault();
 
           const email = document.getElementById("email").value;
@@ -346,14 +359,18 @@
           submitBtn.textContent = "Signing in...";
           submitBtn.disabled = true;
 
-          // Attempt login
-          const result = await login(email, password, rememberMe);
+          // Simulate login process
+          setTimeout(() => {
+            // Save email if remember me is checked
+            if (rememberMe) {
+              saveToLocalStorage(email);
+            }
 
-          // Reset button state
-          submitBtn.textContent = originalBtnText;
-          submitBtn.disabled = false;
+            // Reset button state
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
 
-          if (result.success) {
+            // Show success message
             showToast("Login successful! Redirecting...", "success");
 
             // Redirect to homepage or previous page after successful login
@@ -363,15 +380,10 @@
                 "../index.html";
               window.location.href = redirectUrl;
             }, 1500);
-          } else {
-            showToast(
-              result.error || "Login failed. Please check your credentials.",
-              "error"
-            );
-          }
+          }, 1000);
         });
 
-        // Social login buttons (placeholders for now)
+        // Social login buttons (placeholders)
         document
           .querySelector(".btn-google")
           .addEventListener("click", function () {
@@ -383,6 +395,54 @@
           .addEventListener("click", function () {
             showToast("Facebook login is not implemented yet", "info");
           });
+
+        // Show toast messages
+        function showToast(message, type = "info") {
+          // Create toast container if it doesn't exist
+          let toastContainer = document.querySelector(".toast-container");
+          if (!toastContainer) {
+            toastContainer = document.createElement("div");
+            toastContainer.className = "toast-container";
+            document.body.appendChild(toastContainer);
+          }
+
+          // Create toast
+          const toast = document.createElement("div");
+          toast.className = `toast toast-${type}`;
+          toast.innerHTML = `
+            <div class="toast-content">
+              <p class="toast-message">${message}</p>
+            </div>
+            <button class="toast-close">×</button>
+          `;
+
+          // Add to container
+          toastContainer.appendChild(toast);
+
+          // Show toast
+          setTimeout(() => {
+            toast.classList.add("show");
+          }, 100);
+
+          // Auto remove after 3 seconds
+          setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => {
+              toast.remove();
+            }, 300);
+          }, 3000);
+
+          // Close on click
+          const closeBtn = toast.querySelector(".toast-close");
+          if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+              toast.classList.remove("show");
+              setTimeout(() => {
+                toast.remove();
+              }, 300);
+            });
+          }
+        }
       });
     </script>
   </body>

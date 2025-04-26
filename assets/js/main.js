@@ -1,7 +1,18 @@
 /**
  * Modern E-Commerce Website
  * Main JavaScript file
+ *
+ * OPTIMIZATION NOTE:
+ * For better organization and maintenance:
+ * 1. Consider organizing code into modules (product, cart, wishlist, UI)
+ * 2. Move initialization code to a dedicated init module
+ * 3. Use a bundler like Webpack to combine modules for production
  */
+
+// Helper utility to get product name consistently
+function getProductName(product) {
+  return product.title || product.name || "Product";
+}
 
 // DOM Elements
 const mobileMenuBtn = document.getElementById("mobile-menu-btn");
@@ -136,21 +147,6 @@ if (checkoutBtn) {
       updateCartDisplay();
       showMessage("Order placed successfully!", "success");
     }, 2000);
-  });
-}
-
-// Toggle search bar when search icon is clicked
-const searchIcon = document.querySelector('.nav-icon[aria-label="Search"]');
-const searchContainer = document.querySelector(".search-container");
-
-if (searchIcon && searchContainer) {
-  searchIcon.addEventListener("click", function (e) {
-    e.preventDefault();
-    searchContainer.style.display =
-      searchContainer.style.display === "block" ? "none" : "block";
-    if (searchContainer.style.display === "block") {
-      document.getElementById("search-input").focus();
-    }
   });
 }
 
@@ -578,7 +574,7 @@ function addToCart(productId) {
 
   saveCart();
   updateCartDisplay();
-  const productName = product.title || product.name;
+  const productName = getProductName(product);
   showMessage(`${productName} added to your cart!`, "success");
 }
 
@@ -632,12 +628,14 @@ function updateCartDisplay() {
     state.cart.forEach((item) => {
       const itemTotal = item.price * item.quantity;
       totalPrice += itemTotal;
+      // Use title or name property, whichever exists
+      const itemName = getProductName(item);
 
       cartHtml += `
         <div class="cart-item" data-id="${item.id}">
-          <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+          <img src="${item.image}" alt="${itemName}" class="cart-item-img">
           <div class="cart-item-details">
-            <h3>${item.name}</h3>
+            <h3>${itemName}</h3>
             <p class="product-price">$${item.price.toFixed(2)}</p>
             <div class="quantity-control">
               <button class="btn-sm" onclick="updateCartQuantity(${item.id}, ${
@@ -713,7 +711,7 @@ function updateWishlistDisplay() {
     let wishlistHtml = "";
 
     state.wishlist.forEach((item) => {
-      const name = item.title || item.name;
+      const name = getProductName(item);
       wishlistHtml += `
         <div class="product-card" data-id="${item.id}">
           <div class="product-img-container">
@@ -805,7 +803,7 @@ function renderProducts() {
   let productsHtml = "";
 
   state.filteredProducts.forEach((product) => {
-    const name = product.name || product.title;
+    const name = getProductName(product);
     // Calculate discount price if applicable
     let displayPrice = product.price;
     let oldPrice = "";
@@ -1113,12 +1111,12 @@ function toggleWishlist(productId) {
   if (productIndex !== -1) {
     // Product is in wishlist, remove it
     state.wishlist.splice(productIndex, 1);
-    const productName = product.title || product.name;
+    const productName = getProductName(product);
     message = `${productName} removed from your wishlist!`;
   } else {
     // Product is not in wishlist, add it
     state.wishlist.push(product);
-    const productName = product.title || product.name;
+    const productName = getProductName(product);
     message = `${productName} added to your wishlist!`;
   }
 
@@ -1148,7 +1146,7 @@ function performSearch() {
 
   // Filter products based on search query
   const filteredProducts = state.products.filter((product) => {
-    const name = product.title || product.name || "";
+    const name = getProductName(product);
     return (
       name.toLowerCase().includes(query) ||
       (product.category || "").toLowerCase().includes(query) ||
@@ -1170,7 +1168,7 @@ function performSearch() {
     html += '<div class="search-results-grid">';
 
     filteredProducts.forEach((product) => {
-      const productName = product.title || product.name;
+      const productName = getProductName(product);
       html += `
         <div class="search-result-item">
           <img src="${
