@@ -20,6 +20,7 @@ const sortSelect = document.getElementById("sort-select");
 let state = {
   products: [],
   cart: [],
+  wishlist: [],
   filteredProducts: [],
   filters: {
     category: "all",
@@ -374,6 +375,7 @@ function resetFilters() {
 function initApp() {
   loadProducts();
   loadCart();
+  loadWishlist();
 
   // Initialize any sliders or carousels
   initSlider();
@@ -507,12 +509,35 @@ function loadCart() {
   }
 }
 
+// Load Wishlist from localStorage
+function loadWishlist() {
+  try {
+    const savedWishlist = localStorage.getItem("wishlist");
+    if (savedWishlist) {
+      state.wishlist = JSON.parse(savedWishlist);
+      updateWishlistDisplay();
+    }
+  } catch (error) {
+    console.error("Error loading wishlist:", error);
+    showMessage("Failed to load your wishlist.", "error");
+  }
+}
+
 // Save Cart to localStorage
 function saveCart() {
   try {
     localStorage.setItem("cart", JSON.stringify(state.cart));
   } catch (error) {
     console.error("Error saving cart:", error);
+  }
+}
+
+// Save Wishlist to localStorage
+function saveWishlist() {
+  try {
+    localStorage.setItem("wishlist", JSON.stringify(state.wishlist));
+  } catch (error) {
+    console.error("Error saving wishlist:", error);
   }
 }
 
@@ -620,6 +645,130 @@ function updateCartDisplay() {
   }
 }
 
+// Update Wishlist Display
+function updateWishlistDisplay() {
+  // Update wishlist icons on product cards
+  document.querySelectorAll(".wishlist-btn").forEach((btn) => {
+    // Use data-product-id attribute instead of parent card data attribute
+    const productId = parseInt(btn.dataset.productId);
+    if (!productId) return; // Skip if no product ID
+
+    const isInWishlist = state.wishlist.some((item) => item.id === productId);
+
+    // Update button appearance
+    btn.classList.toggle("active", isInWishlist);
+
+    // Update icon
+    const icon = btn.querySelector("i");
+    if (icon) {
+      if (isInWishlist) {
+        icon.classList.remove("far");
+        icon.classList.add("fas");
+      } else {
+        icon.classList.remove("fas");
+        icon.classList.add("far");
+      }
+    }
+  });
+
+  // Update wishlist page if we're on it
+  const wishlistContainer = document.getElementById("wishlist-items");
+  if (wishlistContainer) {
+    if (state.wishlist.length === 0) {
+      wishlistContainer.innerHTML =
+        '<p class="text-center">Your wishlist is empty.</p>';
+      // Show empty message if it exists
+      const emptyWishlistEl = document.getElementById("empty-wishlist");
+      if (emptyWishlistEl) {
+        emptyWishlistEl.style.display = "block";
+      }
+      return;
+    }
+
+    // Hide empty message if not empty
+    const emptyWishlistEl = document.getElementById("empty-wishlist");
+    if (emptyWishlistEl) {
+      emptyWishlistEl.style.display = "none";
+    }
+
+    let wishlistHtml = "";
+
+    state.wishlist.forEach((item) => {
+      const name = item.title || item.name;
+      wishlistHtml += `
+        <div class="product-card" data-id="${item.id}">
+          <div class="product-img-container">
+            <img src="${item.image}" alt="${name}" class="product-img">
+            ${
+              item.discount
+                ? `<span class="product-badge discount-badge">-${item.discount}%</span>`
+                : ""
+            }
+            ${
+              item.new ? '<span class="product-badge new-badge">New</span>' : ""
+            }
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">${name}</h3>
+            <div class="product-meta">
+              <p class="product-price">$${item.price.toFixed(2)}</p>
+              <div class="product-rating">
+                ${generateRatingStars(item.rating)}
+              </div>
+            </div>
+            <p class="product-brand">${item.brand || ""}</p>
+            <p class="product-description">${item.description}</p>
+            <div class="product-actions">
+              <button class="btn add-to-cart-btn" onclick="addToCart(${
+                item.id
+              })">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+              </button>
+              <button class="btn-sm wishlist-btn active" data-product-id="${
+                item.id
+              }">
+                <i class="fas fa-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    wishlistContainer.innerHTML = wishlistHtml;
+
+    // Add event listeners to wishlist buttons
+    wishlistContainer.querySelectorAll(".wishlist-btn").forEach((btn) => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        const productId = parseInt(this.dataset.productId);
+        toggleWishlist(productId);
+      });
+    });
+  }
+}
+
+// Helper function to generate rating stars HTML
+function generateRatingStars(rating) {
+  if (!rating) return "";
+
+  let starsHtml = "";
+  // Full stars
+  for (let i = 1; i <= Math.floor(rating); i++) {
+    starsHtml += '<i class="fas fa-star"></i>';
+  }
+  // Half star if needed
+  if (rating % 1 >= 0.5) {
+    starsHtml += '<i class="fas fa-star-half-alt"></i>';
+  }
+  // Empty stars
+  for (let i = Math.ceil(rating); i < 5; i++) {
+    starsHtml += '<i class="far fa-star"></i>';
+  }
+
+  return starsHtml;
+}
+
 // Render Products
 function renderProducts() {
   if (!productGrid) return;
@@ -675,6 +824,13 @@ function renderProducts() {
       badges += `<span class="product-badge discount-badge">-${product.discount}%</span>`;
     }
 
+    // Check if product is in wishlist
+    const isInWishlist = state.wishlist.some((item) => item.id === product.id);
+    const wishlistIconClass = isInWishlist ? "fas fa-heart" : "far fa-heart";
+    const wishlistBtnClass = isInWishlist
+      ? "wishlist-btn active"
+      : "wishlist-btn";
+
     productsHtml += `
       <div class="product-card" data-id="${product.id}">
         <div class="product-img-container">
@@ -695,8 +851,10 @@ function renderProducts() {
             })">
               <i class="fas fa-shopping-cart"></i> Add to Cart
             </button>
-            <button class="btn-sm wishlist-btn" aria-label="Add to Wishlist">
-              <i class="far fa-heart"></i>
+            <button class="btn-sm ${wishlistBtnClass}" data-product-id="${
+      product.id
+    }" aria-label="Add to Wishlist">
+              <i class="${wishlistIconClass}"></i>
             </button>
           </div>
         </div>
@@ -705,6 +863,15 @@ function renderProducts() {
   });
 
   productGrid.innerHTML = productsHtml;
+
+  // Add event listeners to wishlist buttons after rendering
+  document.querySelectorAll(".wishlist-btn").forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      const productId = parseInt(this.dataset.productId);
+      toggleWishlist(productId);
+    });
+  });
 }
 
 // Filter Products
@@ -913,10 +1080,39 @@ function initSlider() {
   });
 }
 
+// Toggle Product in Wishlist
+function toggleWishlist(productId) {
+  const productIndex = state.wishlist.findIndex(
+    (item) => item.id === productId
+  );
+  const product = state.products.find((p) => p.id === productId);
+
+  if (!product) return;
+
+  let message = "";
+
+  if (productIndex !== -1) {
+    // Product is in wishlist, remove it
+    state.wishlist.splice(productIndex, 1);
+    const productName = product.title || product.name;
+    message = `${productName} removed from your wishlist!`;
+  } else {
+    // Product is not in wishlist, add it
+    state.wishlist.push(product);
+    const productName = product.title || product.name;
+    message = `${productName} added to your wishlist!`;
+  }
+
+  saveWishlist();
+  updateWishlistDisplay();
+  showMessage(message, "info");
+}
+
 // Make functions available globally
 window.addToCart = addToCart;
 window.updateCartQuantity = updateCartQuantity;
 window.removeFromCart = removeFromCart;
+window.toggleWishlist = toggleWishlist;
 
 function performSearch() {
   const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
