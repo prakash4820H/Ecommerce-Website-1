@@ -391,9 +391,20 @@ async function loadProducts() {
         '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i><p>Loading products...</p></div>';
     }
 
+    // Determine the correct path to products.json based on the current location
+    const isHomePage =
+      window.location.pathname.endsWith("/") ||
+      window.location.pathname.endsWith("index.html") ||
+      window.location.pathname === "" ||
+      window.location.pathname === "/index.html";
+
+    const productsPath = isHomePage
+      ? "assets/data/products.json"
+      : "../assets/data/products.json";
+
     // In a real app, this would be an API call
-    // For now, we'll load from the JSON file
-    const response = await fetch("../assets/data/products.json");
+    // For now, we'll load from the JSON file with a path that works both locally and when deployed
+    const response = await fetch(productsPath);
 
     // Check if response is ok
     if (!response.ok) {

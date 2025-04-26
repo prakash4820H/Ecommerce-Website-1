@@ -834,7 +834,10 @@
       // This will dynamically update the category counts from products.json data
       document.addEventListener("DOMContentLoaded", function () {
         // Fetch products and count by category
-        fetch("../assets/data/products.json")
+        // Use the correct path that works in both local and deployed environments
+        const productsPath = "../assets/data/products.json";
+
+        fetch(productsPath)
           .then((response) => response.json())
           .then((data) => {
             // Get the products array from the data object
