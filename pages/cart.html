@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Your Shopping Cart - Complete your purchase with fast checkout"
+    />
+    <title>Shopping Cart | ShopNow</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-logo">
+            <a href="../index.html">ShopNow</a>
+          </div>
+
+          <button
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li><a href="categories.html" class="nav-link">Categories</a></li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <a href="#" class="nav-icon" aria-label="Search">
+              <i class="fas fa-search"></i>
+            </a>
+            <a href="account.html" class="nav-icon" aria-label="My Account">
+              <i class="fas fa-user"></i>
+            </a>
+            <a
+              href="cart.html"
+              class="nav-icon active"
+              aria-label="Shopping Cart"
+            >
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count" class="cart-count hidden">0</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1>Your Shopping Cart</h1>
+          <div class="breadcrumbs">
+            <a href="../index.html">Home</a> /
+            <span>Cart</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cart Section -->
+      <section class="cart-section">
+        <div class="container">
+          <div class="cart-container">
+            <!-- Cart Items -->
+            <div class="cart-items-container">
+              <h2>Cart Items</h2>
+              <div id="cart-items">
+                <!-- Cart items will be populated by JavaScript -->
+                <!-- Empty cart message will show if cart is empty -->
+              </div>
+            </div>
+
+            <!-- Cart Summary -->
+            <div class="cart-summary">
+              <h2>Order Summary</h2>
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span id="shipping">$0.00</span>
+              </div>
+              <div class="summary-row">
+                <span>Tax</span>
+                <span id="tax">$0.00</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
+              </div>
+
+              <!-- Coupon Code -->
+              <div class="coupon-container">
+                <h3>Have a coupon?</h3>
+                <div class="coupon-form">
+                  <input
+                    type="text"
+                    id="coupon-code"
+                    placeholder="Enter coupon code"
+                  />
+                  <button id="apply-coupon" class="btn btn-sm">Apply</button>
+                </div>
+              </div>
+
+              <!-- Checkout Buttons -->
+              <div class="checkout-actions">
+                <button id="checkout-btn" class="btn btn-lg">
+                  Proceed to Checkout
+                </button>
+                <a href="shop.html" class="continue-shopping"
+                  >Continue Shopping</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Recommended Products -->
+          <div class="recommended-products">
+            <h2>You Might Also Like</h2>
+            <div class="product-grid" id="recommended-products">
+              <!-- Recommended products will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-title">ShopNow</h3>
+            <p>
+              Discover the perfect blend of quality, style, and affordability
+              with our extensive collection of products.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Pinterest"
+                ><i class="fab fa-pinterest-p"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Shop</h3>
+            <ul class="footer-links">
+              <li><a href="shop.html?category=electronics">Electronics</a></li>
+              <li><a href="shop.html?category=clothing">Clothing</a></li>
+              <li><a href="shop.html?category=footwear">Footwear</a></li>
+              <li><a href="shop.html?category=accessories">Accessories</a></li>
+              <li><a href="shop.html?discount=true">Sale</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="shipping.html">Shipping & Returns</a></li>
+              <li><a href="terms.html">Terms & Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">My Account</h3>
+            <ul class="footer-links">
+              <li><a href="account.html">My Account</a></li>
+              <li><a href="orders.html">Order History</a></li>
+              <li><a href="wishlist.html">Wishlist</a></li>
+              <li><a href="newsletter.html">Newsletter</a></li>
+              <li><a href="returns.html">Returns</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2023 ShopNow. All rights reserved.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container"></div>
+
+    <!-- Custom JavaScript -->
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

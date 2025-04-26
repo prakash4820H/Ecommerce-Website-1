@@ -3,119 +3,674 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>THIS™ – Home</title>
-    <!-- Google Font for a modern look -->
+    <meta
+      name="description"
+      content="Modern E-Commerce Store - Shop the latest products with fast delivery"
+    />
+    <title>ShopNow | Modern E-Commerce Store</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/images/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/components.css" />
+
+    <style>
+      /* Enhanced Home Page Styles */
+      .hero-slider {
+        height: 80vh;
+        box-shadow: var(--box-shadow-lg);
+      }
+
+      .slide-content h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        animation: fadeInUp 1s ease;
+      }
+
+      .slide-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        animation: fadeInUp 1.3s ease;
+      }
+
+      .slide-content .btn {
+        animation: fadeInUp 1.6s ease;
+        padding: 0.8rem 2rem;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .categories-section {
+        padding: 5rem 0;
+        background-color: var(--light-bg);
+      }
+
+      .section-title {
+        position: relative;
+        margin-bottom: 3rem;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+      }
+
+      .section-title:after {
+        content: "";
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background-color: var(--primary-color);
+        border-radius: 2px;
+      }
+
+      .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .category-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--box-shadow-md);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 320px;
+      }
+
+      .category-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--box-shadow-lg);
+      }
+
+      .category-img-container {
+        height: 100%;
+        width: 100%;
+        position: relative;
+      }
+
+      .category-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .category-card:hover .category-img {
+        transform: scale(1.1);
+      }
+
+      .category-card h3 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem;
+        margin: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        color: var(--light-text);
+        font-size: 1.4rem;
+        text-align: center;
+        transition: padding 0.3s ease;
+      }
+
+      .category-card:hover h3 {
+        padding-bottom: 2rem;
+      }
+
+      .featured-products-section,
+      .new-arrivals-section {
+        padding: 5rem 0;
+      }
+
+      .featured-products-section {
+        background-color: var(--light-text);
+      }
+
+      .banner-section {
+        padding: 0;
+        margin: 5rem 0;
+      }
+
+      .banner {
+        position: relative;
+        height: 400px;
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+      }
+
+      .banner-overlay {
+        background: linear-gradient(
+          45deg,
+          rgba(58, 134, 255, 0.9),
+          rgba(255, 0, 110, 0.7)
+        );
+      }
+
+      .banner-content {
+        z-index: 10;
+        text-align: center;
+        max-width: 700px;
+        padding: var(--spacing-xl);
+      }
+
+      .banner-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--light-text);
+      }
+
+      .banner-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        color: var(--light-text);
+      }
+
+      .banner-content .btn {
+        background-color: var(--light-text);
+        color: var(--primary-color);
+        font-weight: 700;
+      }
+
+      .banner-content .btn:hover {
+        background-color: var(--gray-100);
+      }
+
+      .features-section {
+        padding: 5rem 0;
+        background-color: var(--light-bg);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .feature-card {
+        background: var(--light-text);
+        padding: 2.5rem 2rem;
+        border-radius: var(--border-radius-md);
+        text-align: center;
+        box-shadow: var(--box-shadow-sm);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--box-shadow-md);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+      }
+
+      .newsletter-section {
+        padding: 5rem 0;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        color: var(--light-text);
+        text-align: center;
+      }
+
+      .newsletter-section h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .newsletter-section p {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .newsletter-form {
+        display: flex;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .newsletter-form input {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        border: none;
+        border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+        font-size: 1rem;
+      }
+
+      .newsletter-form .btn {
+        padding: 1rem 2rem;
+        border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+        background-color: var(--secondary-color);
+        font-weight: 600;
+        font-size: 1rem;
+        transition: background-color var(--transition-speed);
+      }
+
+      .newsletter-form .btn:hover {
+        background-color: #e5004e;
+      }
+
+      @media (max-width: 768px) {
+        .slide-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .banner {
+          height: 350px;
+        }
+
+        .newsletter-form {
+          flex-direction: column;
+        }
+
+        .newsletter-form input {
+          border-radius: var(--border-radius-sm);
+          margin-bottom: 1rem;
+        }
+
+        .newsletter-form .btn {
+          border-radius: var(--border-radius-sm);
+        }
+      }
+
+      @media (max-width: 576px) {
+        .slide-content h1 {
+          font-size: 2rem;
+        }
+
+        .banner {
+          height: 300px;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <header class="sticky">
-      <nav>
-        <ul>
-          <!-- Logo replaces "Home" -->
-          <li class="logo">
-            <a href="index.html">
-              <img
-                src="https://this.co/wp-content/uploads/2020/08/logo_footer_tm.png"
-                alt="Logo"
-                style="height:50px; width:auto;"
-              />
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-logo">
+            <a href="index.html">ShopNow</a>
+          </div>
+
+          <button
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li><a href="index.html" class="nav-link active">Home</a></li>
+            <li><a href="pages/shop.html" class="nav-link">Shop</a></li>
+            <li>
+              <a href="pages/categories.html" class="nav-link">Categories</a>
+            </li>
+            <li><a href="pages/about.html" class="nav-link">About</a></li>
+            <li><a href="pages/contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <a href="#" class="nav-icon" aria-label="Search">
+              <i class="fas fa-search"></i>
             </a>
-          </li>
-          <li><a href="about.html">About Us</a></li>
-          <li><a href="products.html">Products</a></li>
-          <!-- Shop Now link relocated here (redirects to products page) -->
-          <li><a href="products.html">Shop Now</a></li>
-          <li><a href="cart.html">Cart</a></li>
-        </ul>
-      </nav>
+            <a
+              href="pages/account.html"
+              class="nav-icon"
+              aria-label="My Account"
+            >
+              <i class="fas fa-user"></i>
+            </a>
+            <a
+              href="pages/cart.html"
+              class="nav-icon"
+              aria-label="Shopping Cart"
+            >
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count" class="cart-count hidden">0</span>
+            </a>
+          </div>
+        </nav>
+      </div>
     </header>
 
+    <!-- Main Content -->
     <main>
-      <!-- Hero Slider Section -->
-<section class="hero-slider">
-  <div
-    class="slide active"
-    style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_huge/5ae238371e9b6/ingredients-first-italian-0921-3000px.jpg');"
-  >
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <h1>Welcome to THIS™</h1>
-      <p>Revolutionizing plant-based meat alternatives.</p>
-      <!-- Removed the "Shop Now" button from this slide -->
-    </div>
-  </div>
-  <div
-    class="slide"
-    style="background-image: url('https://db3h9mjhnho7v.cloudfront.net/slideshow_big/5ae0f343d4c1d/andy-rachel-berliner-our-family.jpg');"
-  >
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <h1>Innovative Taste</h1>
-      <p>Experience real flavor with sustainable innovation.</p>
-      <a href="products.html" class="btn">Explore Products</a>
-    </div>
-  </div>
-  <!-- Slider Navigation Dots -->
-  <div class="slider-dots">
-    <span class="dot active" onclick="showSlide(0)"></span>
-    <span class="dot" onclick="showSlide(1)"></span>
-  </div>
-</section>
+      <!-- Hero Section with Slider -->
+      <section class="hero-slider">
+        <div
+          class="slide active"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="hero-overlay"></div>
+          <div class="hero-content container">
+            <h1>Summer Collection 2023</h1>
+            <p>Discover the latest trends with up to 50% off</p>
+            <a href="pages/shop.html" class="btn btn-lg">Shop Now</a>
+          </div>
+        </div>
 
+        <div
+          class="slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="hero-overlay"></div>
+          <div class="hero-content container">
+            <h1>New Tech Arrivals</h1>
+            <p>The latest gadgets for your modern lifestyle</p>
+            <a href="pages/shop.html?category=electronics" class="btn btn-lg"
+              >Explore Tech</a
+            >
+          </div>
+        </div>
+
+        <div
+          class="slide"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="hero-overlay"></div>
+          <div class="hero-content container">
+            <h1>Fashion Forward</h1>
+            <p>Express yourself with our premium clothing collection</p>
+            <a href="pages/shop.html?category=clothing" class="btn btn-lg"
+              >View Collection</a
+            >
+          </div>
+        </div>
+
+        <!-- Slider Navigation -->
+        <div class="slider-dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </section>
+
+      <!-- Categories Section -->
+      <section class="categories-section">
+        <div class="container">
+          <h2 class="section-title">Shop by Category</h2>
+          <div class="categories-grid">
+            <a
+              href="pages/shop.html?category=electronics"
+              class="category-card"
+            >
+              <div class="category-img-container">
+                <img
+                  src="https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=600&q=80"
+                  alt="Electronics"
+                  class="category-img"
+                />
+              </div>
+              <h3>Electronics</h3>
+            </a>
+
+            <a href="pages/shop.html?category=clothing" class="category-card">
+              <div class="category-img-container">
+                <img
+                  src="https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=600&q=80"
+                  alt="Clothing"
+                  class="category-img"
+                />
+              </div>
+              <h3>Clothing</h3>
+            </a>
+
+            <a href="pages/shop.html?category=footwear" class="category-card">
+              <div class="category-img-container">
+                <img
+                  src="https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80"
+                  alt="Footwear"
+                  class="category-img"
+                />
+              </div>
+              <h3>Footwear</h3>
+            </a>
+
+            <a
+              href="pages/shop.html?category=accessories"
+              class="category-card"
+            >
+              <div class="category-img-container">
+                <img
+                  src="https://images.unsplash.com/photo-1627123424574-724758594e93?auto=format&fit=crop&w=600&q=80"
+                  alt="Accessories"
+                  class="category-img"
+                />
+              </div>
+              <h3>Accessories</h3>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <!-- Featured Products Section -->
-<!-- In index.html -->
-<section class="featured-products">
-  <h2>Featured Products</h2>
-  <div class="product-grid" id="featured-products">
-    <!-- 8 products will be loaded here -->
-  </div>
-</section>
+      <section class="featured-products-section">
+        <div class="container">
+          <h2 class="section-title">Featured Products</h2>
+          <div class="product-grid" id="featured-products"></div>
+        </div>
+      </section>
 
-
-      <!-- Testimonials Section -->
-      <section class="testimonials">
-        <h2>What Our Customers Say</h2>
-        <div class="testimonial-container">
-          <div class="testimonial">
-            <p>"THIS™ has completely changed my view on plant-based food. The taste is extraordinary!"</p>
-            <h4>- Alex</h4>
-          </div>
-          <div class="testimonial">
-            <p>"Finally, a product that combines quality with sustainability. I'm in love!"</p>
-            <h4>- Jamie</h4>
-          </div>
-          <div class="testimonial">
-            <p>"Every bite is bursting with flavor. THIS™ is truly setting a new standard."</p>
-            <h4>- Morgan</h4>
+      <!-- Banner Section -->
+      <section class="banner-section">
+        <div
+          class="banner"
+          style="
+            background-image: url('https://images.unsplash.com/photo-1607082349566-187342175e2f?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="banner-overlay"></div>
+          <div class="banner-content container">
+            <h2>Limited Time Offer</h2>
+            <p>Get 30% off on selected products</p>
+            <a href="pages/shop.html?discount=true" class="btn">Shop Sale</a>
           </div>
         </div>
       </section>
 
-      <!-- Call To Action Section -->
-      <section class="cta">
-        <h2>Join the Plant-Based Revolution</h2>
-        <p>Stay updated with our latest products and exclusive offers.</p>
-        <a href="subscribe.html" class="btn">Subscribe Now</a>
+      <!-- New Arrivals Section -->
+      <section class="new-arrivals-section">
+        <div class="container">
+          <h2 class="section-title">New Arrivals</h2>
+          <div class="product-grid" id="new-arrivals"></div>
+          <div class="text-center">
+            <a href="pages/shop.html" class="btn btn-lg">View All Products</a>
+          </div>
+        </div>
       </section>
 
-      <!-- Extended Product Showcase Section -->
-      <section class="extended-products">
-        <h2>Explore Our Full Range</h2>
-        <div class="product-grid" id="extended-products">
-          <!-- All products loaded dynamically via scripts.js -->
+      <!-- Features Section -->
+      <section class="features-section">
+        <div class="container">
+          <div class="features-grid">
+            <div class="feature-card">
+              <i class="fas fa-truck feature-icon"></i>
+              <h3>Free Shipping</h3>
+              <p>On orders over $50</p>
+            </div>
+
+            <div class="feature-card">
+              <i class="fas fa-shield-alt feature-icon"></i>
+              <h3>Secure Payment</h3>
+              <p>100% secure transactions</p>
+            </div>
+
+            <div class="feature-card">
+              <i class="fas fa-exchange-alt feature-icon"></i>
+              <h3>Easy Returns</h3>
+              <p>30-day return policy</p>
+            </div>
+
+            <div class="feature-card">
+              <i class="fas fa-headset feature-icon"></i>
+              <h3>24/7 Support</h3>
+              <p>Dedicated customer service</p>
+            </div>
+          </div>
         </div>
-        <a href="products.html" class="btn">View All Products</a>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section class="newsletter-section">
+        <div class="container">
+          <h2>Join Our Newsletter</h2>
+          <p>
+            Subscribe to get special offers, free giveaways, and
+            once-in-a-lifetime deals.
+          </p>
+          <form id="newsletter-form" class="newsletter-form">
+            <input
+              type="email"
+              id="newsletter-email"
+              placeholder="Your email address"
+              required
+            />
+            <button type="submit" class="btn">Subscribe</button>
+          </form>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <p>&copy; 2025 THIS™. All rights reserved.</p>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-title">ShopNow</h3>
+            <p>
+              Discover the perfect blend of quality, style, and affordability
+              with our extensive collection of products.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Pinterest"
+                ><i class="fab fa-pinterest-p"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Shop</h3>
+            <ul class="footer-links">
+              <li>
+                <a href="pages/shop.html?category=electronics">Electronics</a>
+              </li>
+              <li><a href="pages/shop.html?category=clothing">Clothing</a></li>
+              <li><a href="pages/shop.html?category=footwear">Footwear</a></li>
+              <li>
+                <a href="pages/shop.html?category=accessories">Accessories</a>
+              </li>
+              <li><a href="pages/shop.html?discount=true">Sale</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="pages/contact.html">Contact Us</a></li>
+              <li><a href="pages/faq.html">FAQs</a></li>
+              <li><a href="pages/shipping.html">Shipping & Returns</a></li>
+              <li><a href="pages/terms.html">Terms & Conditions</a></li>
+              <li><a href="pages/privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">My Account</h3>
+            <ul class="footer-links">
+              <li><a href="pages/account.html">My Account</a></li>
+              <li><a href="pages/orders.html">Order History</a></li>
+              <li><a href="pages/wishlist.html">Wishlist</a></li>
+              <li><a href="pages/newsletter.html">Newsletter</a></li>
+              <li><a href="pages/returns.html">Returns</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2023 ShopNow. All rights reserved.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
     </footer>
-    <script src="scripts.js"></script>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container"></div>
+
+    <!-- Custom JavaScript -->
+    <script src="assets/js/main.js"></script>
   </body>
 </html>

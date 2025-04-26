@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Browse all product categories - Electronics, Clothing, Footwear and more"
+    />
+    <title>Product Categories | ShopNow</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../assets/images/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="../assets/css/components.css" />
+
+    <style>
+      /* Enhanced Categories Page Styles */
+      .category-hero {
+        height: 50vh;
+        background-image: url("https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 4rem;
+      }
+
+      .category-hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+      }
+
+      .category-hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        color: var(--light-text);
+        max-width: 800px;
+        padding: 0 2rem;
+      }
+
+      .category-hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .category-hero-content p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+
+      .categories-container {
+        padding: 2rem 0 5rem;
+      }
+
+      .category-section {
+        margin-bottom: 5rem;
+      }
+
+      .category-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .category-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        border-bottom: 1px solid var(--gray-300);
+        padding-bottom: 1rem;
+      }
+
+      .category-header h2 {
+        font-size: 2rem;
+        margin: 0;
+        color: var(--text-color);
+      }
+
+      .view-all {
+        color: var(--primary-color);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        transition: var(--transition-speed);
+      }
+
+      .view-all:hover {
+        color: var(--secondary-color);
+      }
+
+      .view-all i {
+        margin-left: 0.5rem;
+        transition: transform var(--transition-speed);
+      }
+
+      .view-all:hover i {
+        transform: translateX(5px);
+      }
+
+      .category-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .subcategory-card {
+        background-color: var(--light-text);
+        border-radius: var(--border-radius-md);
+        overflow: hidden;
+        box-shadow: var(--box-shadow-sm);
+        transition: transform var(--transition-speed),
+          box-shadow var(--transition-speed);
+      }
+
+      .subcategory-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--box-shadow-md);
+      }
+
+      .subcategory-img-container {
+        height: 200px;
+        overflow: hidden;
+      }
+
+      .subcategory-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .subcategory-card:hover .subcategory-img {
+        transform: scale(1.1);
+      }
+
+      .subcategory-content {
+        padding: 1.5rem;
+      }
+
+      .subcategory-content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+      }
+
+      .subcategory-content p {
+        color: var(--gray-500);
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .subcategory-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.9rem;
+      }
+
+      .item-count {
+        color: var(--gray-500);
+      }
+
+      .browse-btn {
+        color: var(--primary-color);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        transition: var(--transition-speed);
+      }
+
+      .browse-btn:hover {
+        color: var(--secondary-color);
+      }
+
+      .browse-btn i {
+        margin-left: 0.3rem;
+        font-size: 0.8rem;
+        transition: transform var(--transition-speed);
+      }
+
+      .browse-btn:hover i {
+        transform: translateX(3px);
+      }
+
+      .all-categories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .all-category-card {
+        background-color: var(--light-text);
+        border-radius: var(--border-radius-sm);
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--box-shadow-sm);
+        transition: transform var(--transition-speed),
+          box-shadow var(--transition-speed);
+      }
+
+      .all-category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--box-shadow-md);
+      }
+
+      .category-icon {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+      }
+
+      .all-category-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .all-category-card span {
+        font-size: 0.9rem;
+        color: var(--gray-500);
+      }
+
+      @media (max-width: 768px) {
+        .category-hero-content h1 {
+          font-size: 2.5rem;
+        }
+
+        .category-grid {
+          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        }
+
+        .all-categories-grid {
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        }
+      }
+
+      @media (max-width: 576px) {
+        .category-hero {
+          height: 40vh;
+        }
+
+        .category-hero-content h1 {
+          font-size: 2rem;
+        }
+
+        .category-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .category-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .category-header h2 {
+          margin-bottom: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <nav class="nav">
+          <div class="nav-logo">
+            <a href="../index.html">ShopNow</a>
+          </div>
+
+          <button
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <ul class="nav-links">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="shop.html" class="nav-link">Shop</a></li>
+            <li>
+              <a href="categories.html" class="nav-link active">Categories</a>
+            </li>
+            <li><a href="about.html" class="nav-link">About</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+
+          <div class="nav-actions">
+            <a href="#" class="nav-icon" aria-label="Search">
+              <i class="fas fa-search"></i>
+            </a>
+            <a href="account.html" class="nav-icon" aria-label="My Account">
+              <i class="fas fa-user"></i>
+            </a>
+            <a href="cart.html" class="nav-icon" aria-label="Shopping Cart">
+              <i class="fas fa-shopping-cart"></i>
+              <span id="cart-count" class="cart-count hidden">0</span>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Category Hero Section -->
+      <section class="category-hero">
+        <div class="category-hero-overlay"></div>
+        <div class="category-hero-content">
+          <h1>Product Categories</h1>
+          <p>
+            Browse our complete collection of products organized by categories
+          </p>
+        </div>
+      </section>
+
+      <!-- Categories Container -->
+      <section class="categories-container">
+        <div class="container">
+          <!-- Electronics Category -->
+          <div class="category-section">
+            <div class="category-header">
+              <h2>Electronics</h2>
+              <a href="shop.html?category=electronics" class="view-all"
+                >View All Electronics <i class="fas fa-chevron-right"></i
+              ></a>
+            </div>
+
+            <div class="category-grid">
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80"
+                    alt="Laptops & Computers"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Laptops & Computers</h3>
+                  <p>
+                    Powerful devices for work and play, featuring the latest
+                    technology
+                  </p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">24 items</span>
+                    <a
+                      href="shop.html?category=electronics&subcategory=laptops"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1585399000684-d2f72660f092?auto=format&fit=crop&w=600&q=80"
+                    alt="Smartphones & Tablets"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Smartphones & Tablets</h3>
+                  <p>
+                    Stay connected with cutting-edge mobile devices and
+                    accessories
+                  </p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">37 items</span>
+                    <a
+                      href="shop.html?category=electronics&subcategory=smartphones"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80"
+                    alt="Audio & Headphones"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Audio & Headphones</h3>
+                  <p>
+                    Immersive sound experiences with premium audio equipment
+                  </p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">19 items</span>
+                    <a
+                      href="shop.html?category=electronics&subcategory=audio"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1601944179066-29b8f7e31269?auto=format&fit=crop&w=600&q=80"
+                    alt="Gaming & Accessories"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Gaming & Accessories</h3>
+                  <p>
+                    Level up your gaming experience with consoles and
+                    accessories
+                  </p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">42 items</span>
+                    <a
+                      href="shop.html?category=electronics&subcategory=gaming"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Clothing Category -->
+          <div class="category-section">
+            <div class="category-header">
+              <h2>Clothing</h2>
+              <a href="shop.html?category=clothing" class="view-all"
+                >View All Clothing <i class="fas fa-chevron-right"></i
+              ></a>
+            </div>
+
+            <div class="category-grid">
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=600&q=80"
+                    alt="Men's Clothing"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Men's Clothing</h3>
+                  <p>Stylish and comfortable clothing for the modern man</p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">56 items</span>
+                    <a
+                      href="shop.html?category=clothing&subcategory=mens"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80"
+                    alt="Women's Clothing"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Women's Clothing</h3>
+                  <p>Elegant and fashionable apparel for every occasion</p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">78 items</span>
+                    <a
+                      href="shop.html?category=clothing&subcategory=womens"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?auto=format&fit=crop&w=600&q=80"
+                    alt="Kids' Clothing"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Kids' Clothing</h3>
+                  <p>Fun and durable clothing for children of all ages</p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">34 items</span>
+                    <a
+                      href="shop.html?category=clothing&subcategory=kids"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="subcategory-card">
+                <div class="subcategory-img-container">
+                  <img
+                    src="https://images.unsplash.com/photo-1608019527897-598afd89b925?auto=format&fit=crop&w=600&q=80"
+                    alt="Activewear"
+                    class="subcategory-img"
+                  />
+                </div>
+                <div class="subcategory-content">
+                  <h3>Activewear</h3>
+                  <p>Performance clothing designed for comfort and movement</p>
+                  <div class="subcategory-meta">
+                    <span class="item-count">29 items</span>
+                    <a
+                      href="shop.html?category=clothing&subcategory=activewear"
+                      class="browse-btn"
+                      >Browse <i class="fas fa-chevron-right"></i
+                    ></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- All Categories -->
+          <div class="all-categories-section">
+            <h2 class="section-title">All Categories</h2>
+            <div class="all-categories-grid">
+              <a
+                href="shop.html?category=electronics"
+                class="all-category-card"
+              >
+                <i class="fas fa-laptop category-icon"></i>
+                <h3>Electronics</h3>
+                <span>122 items</span>
+              </a>
+
+              <a href="shop.html?category=clothing" class="all-category-card">
+                <i class="fas fa-tshirt category-icon"></i>
+                <h3>Clothing</h3>
+                <span>197 items</span>
+              </a>
+
+              <a href="shop.html?category=footwear" class="all-category-card">
+                <i class="fas fa-shoe-prints category-icon"></i>
+                <h3>Footwear</h3>
+                <span>85 items</span>
+              </a>
+
+              <a
+                href="shop.html?category=accessories"
+                class="all-category-card"
+              >
+                <i class="fas fa-glasses category-icon"></i>
+                <h3>Accessories</h3>
+                <span>64 items</span>
+              </a>
+
+              <a href="shop.html?category=home" class="all-category-card">
+                <i class="fas fa-home category-icon"></i>
+                <h3>Home & Living</h3>
+                <span>108 items</span>
+              </a>
+
+              <a href="shop.html?category=beauty" class="all-category-card">
+                <i class="fas fa-spa category-icon"></i>
+                <h3>Beauty</h3>
+                <span>76 items</span>
+              </a>
+
+              <a href="shop.html?category=sports" class="all-category-card">
+                <i class="fas fa-basketball-ball category-icon"></i>
+                <h3>Sports</h3>
+                <span>93 items</span>
+              </a>
+
+              <a href="shop.html?category=books" class="all-category-card">
+                <i class="fas fa-book category-icon"></i>
+                <h3>Books</h3>
+                <span>112 items</span>
+              </a>
+
+              <a href="shop.html?category=toys" class="all-category-card">
+                <i class="fas fa-gamepad category-icon"></i>
+                <h3>Toys & Games</h3>
+                <span>47 items</span>
+              </a>
+
+              <a href="shop.html?category=jewelry" class="all-category-card">
+                <i class="fas fa-gem category-icon"></i>
+                <h3>Jewelry</h3>
+                <span>39 items</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3 class="footer-title">ShopNow</h3>
+            <p>
+              Discover the perfect blend of quality, style, and affordability
+              with our extensive collection of products.
+            </p>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" aria-label="Instagram"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" aria-label="Pinterest"
+                ><i class="fab fa-pinterest-p"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Shop</h3>
+            <ul class="footer-links">
+              <li><a href="shop.html?category=electronics">Electronics</a></li>
+              <li><a href="shop.html?category=clothing">Clothing</a></li>
+              <li><a href="shop.html?category=footwear">Footwear</a></li>
+              <li><a href="shop.html?category=accessories">Accessories</a></li>
+              <li><a href="shop.html?discount=true">Sale</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">Customer Service</h3>
+            <ul class="footer-links">
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="shipping.html">Shipping & Returns</a></li>
+              <li><a href="terms.html">Terms & Conditions</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3 class="footer-title">My Account</h3>
+            <ul class="footer-links">
+              <li><a href="account.html">My Account</a></li>
+              <li><a href="orders.html">Order History</a></li>
+              <li><a href="wishlist.html">Wishlist</a></li>
+              <li><a href="newsletter.html">Newsletter</a></li>
+              <li><a href="returns.html">Returns</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2023 ShopNow. All rights reserved.</p>
+          <div class="payment-methods">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+            <i class="fab fa-cc-paypal"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container"></div>
+
+    <!-- Custom JavaScript -->
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>
